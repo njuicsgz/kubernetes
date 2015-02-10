@@ -1,0 +1,28 @@
+{  
+  "id": "webservercontroller",  
+  "kind": "ReplicationController",  
+  "apiVersion": "v1beta1",  
+  "labels": {"name": "webserver"},  
+  "desiredState": {  
+    "replicas": 2,  
+    "replicaSelector": {"name": "webserver_pod"},  
+    "podTemplate": {  
+      "desiredState": {  
+         "manifest": {  
+           "version": "v1beta1",  
+           "id": "webserver",  
+           "containers": [{  
+             "name": "webserver",  
+             "image": "allen01:5000/tutum/apache-php",  
+             "command": ["/bin/sh", "-c", "/run.sh"],  
+             "ports": [{  
+		"hostPort": 10080,
+               "containerPort": 80,  
+            }]  
+           }]  
+         }  
+       },  
+       "labels": {"name": "webserver_pod"},  
+      },  
+  }  
+}  

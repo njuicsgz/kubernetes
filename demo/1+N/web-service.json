@@ -1,0 +1,11 @@
+{  
+  "id": "webserver",  
+  "kind": "Service",  
+  "apiVersion": "v1beta1",  
+  "selector": {  
+    "name": "webserver_pod",  
+  },  
+  "protocol": "TCP",  
+  "containerPort": 80,  
+  "port": 40080  
+}  
