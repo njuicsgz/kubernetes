@@ -1,25 +1,40 @@
 1. Docker install in all nodes
     same with another chapter "K8s All-In-One"
 2. Etcd install in master node
+
     \# wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
+    
     \# tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
+    
     \# mkdir -p /opt/bin
+    
     \# cp /usr/local/etcd-v2.0.0-linux-amd64/etcd /opt/bin/
+    
     \# export PATH=$PATH:/opt/bin
+    
     \# service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
 
 3. Install K8s by release tar file in master/minions
+    
     \# tar xzf kubernetes.tar.gz -C /usr/local/
+
     \# cd /usr/local/kubernetes/server/
+    
     \# tar xzf kubernetes-server-linux-amd64.tar.gz
+    
     \# cp kubernetes/server/bin/* /opt/bin/
+    
     \# cd /usr/local/kubernetes/cluster/ubuntu
+    
     \# ./util.sh
 
     We need to disable auto start of some components by edit conf to comment those two lines (do it in minions only, no need to do this if you did not install etcd in minions):
     kube-apiserver.conf           kube-controller-manager.conf   kube-scheduler.conf 
+    
         \# vi /etc/init/kube-apiserver.conf
+        
         \# start on started etcd
+        
         \# stop on stopping etcd
 
     Add change from 'etcd' to 'docker' for 'kube-proxy' and 'kubelet':
@@ -32,9 +47,11 @@
     
 4. Kube Master Conf
     4.1 \# cat /etc/default/etcd
+
         ETCD_OPTS="-listen-client-urls=http://allen01:4001"
   
-    4.2 reconfig master conf and start services         
+    4.2 reconfig master conf and start services       
+    
         root@allen01:~\# cat /etc/default/kube-apiserver 
         KUBE_APISERVER_OPTS="--address=0.0.0.0 \
         --port=8080 \
@@ -218,7 +235,6 @@ ovs-vsctl add-br br0
 ovs-vsctl add-port br0 gre2 -- set interface gre2 type=gre options:remote_ip=172.30.50.87
 ovs-vsctl add-port br0 gre1 -- set interface gre1 type=gre options:remote_ip=172.30.50.78
 \# Add the br0 bridge to docker0 bridge
-=======
 brctl addif $BRIDGE_NAME br0
 
 ovs-vsctl set bridge br0 stp_enable=true
