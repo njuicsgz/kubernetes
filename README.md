@@ -218,6 +218,7 @@ ovs-vsctl add-br br0
 ovs-vsctl add-port br0 gre2 -- set interface gre2 type=gre options:remote_ip=172.30.50.87
 ovs-vsctl add-port br0 gre1 -- set interface gre1 type=gre options:remote_ip=172.30.50.78
 \# Add the br0 bridge to docker0 bridge
+=======
 brctl addif $BRIDGE_NAME br0
 
 ovs-vsctl set bridge br0 stp_enable=true
