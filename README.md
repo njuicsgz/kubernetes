@@ -97,6 +97,7 @@ root@allen01:~\# cat /etc/default/kubelet
 目前尝试了两种Docker网络配置方法：
 * 用flannel配置 （通过flannel配置Docker网络）建议采用flannel模式。
 * 下面script采用OpenVSwitch (不建议)
+
 OVS的缺点是需要手动为每个Docker节点指定IP；建立与其它节点俩俩相通的gre通道，N*(N-1)；当有新的节点进来的时候，需要改动所有已有的配置。
 flannel利用etcd采用集中式的机制进行自动化IP配置；增加新节点不改动已有节点的配置；天生支持访问外网，无需手动配置iptables nat；
 
