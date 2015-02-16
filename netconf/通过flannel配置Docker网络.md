@@ -1,6 +1,6 @@
 ## Reference:
-https://coreos.com/docs/distributed-configuration/etcd-api/
-https://github.com/coreos/flannel
+* https://coreos.com/docs/distributed-configuration/etcd-api/
+* https://github.com/coreos/flannel
 
 ## 1. flannel install on all docker hosts
 ```
@@ -42,8 +42,8 @@ root@allen01:~# docker -d --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU}
 ```
 
 ## 4. Verify
-### 4.1 Containers of differrent host can ping each other
-### 4.2 Containers has route to access public IP, e.g. ping qq.com
+4.1 Containers of differrent host can ping each other
+4.2 Containers has route to access public IP, e.g. ping qq.com
 
 
 
