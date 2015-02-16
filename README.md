@@ -1,7 +1,7 @@
-1. Docker install in all nodes
+##1. Docker install in all nodes
     same with another chapter "K8s All-In-One"
-2. Etcd install in master node
-
+##2. Etcd install in master node
+'''
     \# wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
     
     \# tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
@@ -13,54 +13,50 @@
     \# export PATH=$PATH:/opt/bin
     
     \# service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
-
-3. Install K8s by release tar file in master/minions
-    
+'''
+##3. Install K8s by release tar file in master/minions
+'''
     \# tar xzf kubernetes.tar.gz -C /usr/local/
-
     \# cd /usr/local/kubernetes/server/
-    
     \# tar xzf kubernetes-server-linux-amd64.tar.gz
-    
     \# cp kubernetes/server/bin/* /opt/bin/
-    
     \# cd /usr/local/kubernetes/cluster/ubuntu
-    
     \# ./util.sh
-
+'''
     We need to disable auto start of some components by edit conf to comment those two lines (do it in minions only, no need to do this if you did not install etcd in minions):
     kube-apiserver.conf           kube-controller-manager.conf   kube-scheduler.conf 
-    
-        \# vi /etc/init/kube-apiserver.conf
-        
-        \# start on started etcd
-        
-        \# stop on stopping etcd
-
+    '''
+    \# vi /etc/init/kube-apiserver.conf
+    \# start on started etcd
+    \# stop on stopping etcd
+    '''
     Add change from 'etcd' to 'docker' for 'kube-proxy' and 'kubelet':
-        start on started docker
-        stop on stopping docker
+    '''
+    start on started docker
+    stop on stopping docker
 
-    So the restart dependency is like this:
+    *So the restart dependency is like this:
     [Master and Minions] docker->etcd->kube-apiserver/kube-controller-manager/kube-scheduler/kube-proxy/kubelet
     [Minions] docker->kube-proxy/kubelet
     
-4. Kube Master Conf
-    4.1 \# cat /etc/default/etcd
-
-        ETCD_OPTS="-listen-client-urls=http://allen01:4001"
+##4. Kube Master Conf
+    *4.1 \# cat /etc/default/etcd
+    '''
+    ETCD_OPTS="-listen-client-urls=http://allen01:4001"
+    '''
   
-    4.2 reconfig master conf and start services       
-    
-        root@allen01:~\# cat /etc/default/kube-apiserver 
-        KUBE_APISERVER_OPTS="--address=0.0.0.0 \
-        --port=8080 \
-        --kubelet_port=10250 \
-        --etcd_servers=http://172.30.50.78:4001 \
-        --logtostderr=true \
-        --portal_net=10.0.10.0/24"
-
-        root@allen01:~\# cat /etc/default/kube-scheduler 
+    *4.2 reconfig master conf and start services       
+    '''
+    root@allen01:~\# cat /etc/default/kube-apiserver 
+    KUBE_APISERVER_OPTS="--address=0.0.0.0 \
+    --port=8080 \
+    --kubelet_port=10250 \
+    --etcd_servers=http://172.30.50.78:4001 \
+    --logtostderr=true \
+    --portal_net=10.0.10.0/24"
+    '''
+    '''
+    root@allen01:~\# cat /etc/default/kube-scheduler 
         KUBE_SCHEDULER_OPTS="--logtostderr=true \
         --master=172.30.50.78:8080"
         
@@ -80,8 +76,8 @@
         --etcd_servers=http://172.30.50.78:4001 \
         --logtostderr=true"
         \# service etcd restart   (restart all components of Kube)
-        
-5. Kube Minior * 2
+    '''
+##5. Kube Minior * 2
       root@allen02:~/demo/1+N/netconf\# cat /etc/default/kube-proxy
       KUBE_PROXY_OPTS="--etcd_servers=http://172.30.50.78:4001 \
       --logtostderr=true"
@@ -93,10 +89,10 @@
       --etcd_servers=http://172.30.50.78:4001 \
       --logtostderr=true"
       
-6.  NetWork environment setup
+##6.  NetWork environment setup
+'''
 root@allen01:~/demo/1+N/netconf\# cat ovs-conf.sh 
 \#!/bin/bash
-
 \# Name of the bridge
 BRIDGE_NAME=docker0
 \# Bridge address
@@ -149,7 +145,8 @@ service docker restart
 \# ip r s
 \# ovs-vsctl show
 \# brctl show
-
+'''
+'''
 root@allen02:~/demo/1+N/netconf\# cat ovs-conf.sh 
 \#!/bin/bash
 
@@ -208,8 +205,8 @@ service docker restart
 \# ip r s
 \# ovs-vsctl show
 \# brctl show
-
-
+'''
+'''
 root@allen03:~/demo/1+N/netconf\# cat ovs-conf.sh 
 \#!/bin/bash
 
@@ -267,13 +264,13 @@ service docker restart
 \# ovs-vsctl show
 \# brctl show
    \# ./ovs-conf.sh <run in all nodes to setup network and restart kube/docker/etcd services>
-
-Currently, you could verify network by ping:
+'''
+*Currently, you could verify network by ping:
 root@allen01:~\# ping 10.244.2.1
 root@allen01:~\# ping 10.244.3.1
 
-7. Demo
-7.1 Web service with 2 backends deployment
+##7. Demo
+*7.1 Web service with 2 backends deployment
     \# kubectl create -f web-rc.json
     \# kubectl create -f web-service.json
 root@allen01:~/demo/1+N\# cat web-rc.json                   
@@ -337,7 +334,7 @@ webservercontroller-oh43e   10.244.3.3          webserver           allen01:5000
 \# iptables -nvL -t nat
 \# curl 172.30.50.78:51450
 
-7.2 Auto recovery
+*7.2 Auto recovery
 1) Kill docker instance
 root@allen02:~\# docker ps
 CONTAINER ID        IMAGE                                  COMMAND                CREATED             STATUS              PORTS                   NAMES
@@ -364,7 +361,7 @@ POD                         IP                  CONTAINER(S)        IMAGE(S)    
 webservercontroller-fplln   10.244.1.2          webserver           allen01:5000/tutum/apache-php   172.30.50.78/172.30.50.78   name=webserver_pod   Running
 webservercontroller-oh43e   10.244.3.3          webserver           allen01:5000/tutum/apache-php   172.30.50.88/172.30.50.88   name=webserver_pod   Running
 
-7.3 Load balance by service
+*7.3 Load balance by service
 1) Access service by VIP and port, it will go to back end by RoundRobin
 root@allen01:~/demo/1+N\# kubectl get pods
 POD                         IP                  CONTAINER(S)        IMAGE(S)                        HOST       LABELS               STATUS
