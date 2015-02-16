@@ -2,26 +2,21 @@
     same with another chapter "K8s All-In-One"
 ##2. Etcd install in master node
 '''
-    \# wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
-    
-    \# tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
-    
-    \# mkdir -p /opt/bin
-    
-    \# cp /usr/local/etcd-v2.0.0-linux-amd64/etcd /opt/bin/
-    
-    \# export PATH=$PATH:/opt/bin
-    
-    \# service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
+    # wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
+    # tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
+    # mkdir -p /opt/bin
+    # cp /usr/local/etcd-v2.0.0-linux-amd64/etcd /opt/bin/
+    # export PATH=$PATH:/opt/bin
+    # service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
 '''
 ##3. Install K8s by release tar file in master/minions
 '''
-    \# tar xzf kubernetes.tar.gz -C /usr/local/
-    \# cd /usr/local/kubernetes/server/
-    \# tar xzf kubernetes-server-linux-amd64.tar.gz
-    \# cp kubernetes/server/bin/* /opt/bin/
-    \# cd /usr/local/kubernetes/cluster/ubuntu
-    \# ./util.sh
+    # tar xzf kubernetes.tar.gz -C /usr/local/
+    # cd /usr/local/kubernetes/server/
+    # tar xzf kubernetes-server-linux-amd64.tar.gz
+    # cp kubernetes/server/bin/* /opt/bin/
+    # cd /usr/local/kubernetes/cluster/ubuntu
+    # ./util.sh
 '''
     We need to disable auto start of some components by edit conf to comment those two lines (do it in minions only, no need to do this if you did not install etcd in minions):
     kube-apiserver.conf           kube-controller-manager.conf   kube-scheduler.conf 
