@@ -36,7 +36,7 @@ ip route add 10.244.3.0/24 via 172.30.50.88
 
 # iptables rules
  
-# Enable NAT, let containers access public website
+# Enable NAT
 iptables -t nat -A POSTROUTING -s 10.244.0.0/16 ! -d 10.244.0.0/16 -j MASQUERADE
 # Accept incoming packets for existing connections
 iptables -A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
