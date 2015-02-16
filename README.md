@@ -2,12 +2,12 @@
     same with another chapter "K8s All-In-One"
 ##2. Etcd install in master node
 ```
-    # wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
-    # tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
-    # mkdir -p /opt/bin
-    # cp /usr/local/etcd-v2.0.0-linux-amd64/etcd /opt/bin/
-    # export PATH=$PATH:/opt/bin
-    # service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
+# wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
+# tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
+# mkdir -p /opt/bin
+# cp /usr/local/etcd-v2.0.0-linux-amd64/etcd /opt/bin/
+# export PATH=$PATH:/opt/bin
+# service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
 ```
 ##3. Install K8s by release tar file in master/minions
 ```
@@ -31,17 +31,18 @@ Add change from 'etcd' to 'docker' for 'kube-proxy' and 'kubelet':
 start on started docker
 stop on stopping docker
 ```
-* So the restart dependency is like this:
-[Master and Minions] docker->etcd->kube-apiserver/kube-controller-manager/kube-scheduler/kube-proxy/kubelet
-[Minions] docker->kube-proxy/kubelet
+So the restart dependency is like this:
+* [Master and Minions] docker->etcd->kube-apiserver/kube-controller-manager/kube-scheduler/kube-proxy/kubelet
+* [Minions] docker->kube-proxy/kubelet
     
 ## 4. Kube Master Conf
-    * 4.1 # cat /etc/default/etcd
-    ```
-    ETCD_OPTS="-listen-client-urls=http://allen01:4001"
-    ```
+* 4.1 # cat /etc/default/etcd
+
+```
+ETCD_OPTS="-listen-client-urls=http://allen01:4001"
+```
   
-    *4.2 reconfig master conf and start services       
+* 4.2 reconfig master conf and start services       
     ```
     root@allen01:~\# cat /etc/default/kube-apiserver 
     KUBE_APISERVER_OPTS="--address=0.0.0.0 \
