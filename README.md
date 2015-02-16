@@ -1,32 +1,32 @@
 ##1. Docker install in all nodes
     same with another chapter "K8s All-In-One"
 ##2. Etcd install in master node
-'''
+```
     # wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
     # tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
     # mkdir -p /opt/bin
     # cp /usr/local/etcd-v2.0.0-linux-amd64/etcd /opt/bin/
     # export PATH=$PATH:/opt/bin
     # service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
-'''
+```
 ##3. Install K8s by release tar file in master/minions
-'''
+```
     # tar xzf kubernetes.tar.gz -C /usr/local/
     # cd /usr/local/kubernetes/server/
     # tar xzf kubernetes-server-linux-amd64.tar.gz
     # cp kubernetes/server/bin/* /opt/bin/
     # cd /usr/local/kubernetes/cluster/ubuntu
     # ./util.sh
-'''
+```
     We need to disable auto start of some components by edit conf to comment those two lines (do it in minions only, no need to do this if you did not install etcd in minions):
     kube-apiserver.conf           kube-controller-manager.conf   kube-scheduler.conf 
-    '''
-    \# vi /etc/init/kube-apiserver.conf
-    \# start on started etcd
-    \# stop on stopping etcd
-    '''
+    ```
+    # vi /etc/init/kube-apiserver.conf
+    # start on started etcd
+    # stop on stopping etcd
+    ```
     Add change from 'etcd' to 'docker' for 'kube-proxy' and 'kubelet':
-    '''
+    ```
     start on started docker
     stop on stopping docker
 
@@ -36,12 +36,12 @@
     
 ##4. Kube Master Conf
     *4.1 \# cat /etc/default/etcd
-    '''
+    ```
     ETCD_OPTS="-listen-client-urls=http://allen01:4001"
-    '''
+    ```
   
     *4.2 reconfig master conf and start services       
-    '''
+    ```
     root@allen01:~\# cat /etc/default/kube-apiserver 
     KUBE_APISERVER_OPTS="--address=0.0.0.0 \
     --port=8080 \
@@ -49,8 +49,8 @@
     --etcd_servers=http://172.30.50.78:4001 \
     --logtostderr=true \
     --portal_net=10.0.10.0/24"
-    '''
-    '''
+    ```
+    ```
     root@allen01:~\# cat /etc/default/kube-scheduler 
         KUBE_SCHEDULER_OPTS="--logtostderr=true \
         --master=172.30.50.78:8080"
@@ -71,7 +71,7 @@
         --etcd_servers=http://172.30.50.78:4001 \
         --logtostderr=true"
         \# service etcd restart   (restart all components of Kube)
-    '''
+```
 ##5. Kube Minior * 2
       root@allen02:~/demo/1+N/netconf\# cat /etc/default/kube-proxy
       KUBE_PROXY_OPTS="--etcd_servers=http://172.30.50.78:4001 \
@@ -85,7 +85,8 @@
       --logtostderr=true"
       
 ##6.  NetWork environment setup
-'''
+```
+```
 root@allen01:~/demo/1+N/netconf\# cat ovs-conf.sh 
 \#!/bin/bash
 \# Name of the bridge
@@ -140,8 +141,8 @@ service docker restart
 \# ip r s
 \# ovs-vsctl show
 \# brctl show
-'''
-'''
+```
+```
 root@allen02:~/demo/1+N/netconf\# cat ovs-conf.sh 
 \#!/bin/bash
 
@@ -200,8 +201,8 @@ service docker restart
 \# ip r s
 \# ovs-vsctl show
 \# brctl show
-'''
-'''
+```
+```
 root@allen03:~/demo/1+N/netconf\# cat ovs-conf.sh 
 \#!/bin/bash
 
@@ -259,8 +260,8 @@ service docker restart
 \# ovs-vsctl show
 \# brctl show
    \# ./ovs-conf.sh <run in all nodes to setup network and restart kube/docker/etcd services>
-'''
-*Currently, you could verify network by ping:
+```
+* Currently, you could verify network by ping:
 root@allen01:~\# ping 10.244.2.1
 root@allen01:~\# ping 10.244.3.1
 
@@ -358,6 +359,7 @@ webservercontroller-oh43e   10.244.3.3          webserver           allen01:5000
 
 *7.3 Load balance by service
 1) Access service by VIP and port, it will go to back end by RoundRobin
+```
 root@allen01:~/demo/1+N\# kubectl get pods
 POD                         IP                  CONTAINER(S)        IMAGE(S)                        HOST       LABELS               STATUS
 webservercontroller-fplln   10.244.1.2          webserver           allen01:5000/tutum/apache-php   172.30.50.78/172.30.50.78   name=webserver_pod   Running
@@ -368,7 +370,8 @@ kubernetes          component=apiserver,provider=kubernetes   <none>            
 kubernetes-ro       component=apiserver,provider=kubernetes   <none>               172.17.0.1          80
 webserver           <none>                                    name=webserver_pod   10.0.10.53         40080
 root@allen01:~/demo/1+N\# curl 10.0.10.53:40080
-        <h2>My hostname is: webservercontroller-fplln</h2>      <h2>My IP is: 10.244.1.2</h2>
-        
+  <h2>My hostname is: webservercontroller-fplln</h2>      <h2>My IP is: 10.244.1.2</h2>
+   
 root@allen01:~/demo/1+N\# curl 10.0.10.53:40080
-        <h2>My hostname is: webservercontroller-oh43e</h2>      <h2>My IP is: 10.244.3.3</h2> 
+   <h2>My hostname is: webservercontroller-oh43e</h2>      <h2>My IP is: 10.244.3.3</h2> 
+```
