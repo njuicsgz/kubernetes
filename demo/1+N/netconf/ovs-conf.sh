@@ -39,11 +39,11 @@ ip route add 10.244.3.0/24 via 172.30.50.88
 # Enable NAT, let containers access public website
 iptables -t nat -A POSTROUTING -s 10.244.0.0/16 ! -d 10.244.0.0/16 -j MASQUERADE
 # Accept incoming packets for existing connections
-#iptables -A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 # Accept all non-intercontainer outgoing packets
-#iptables -A FORWARD -i docker0 ! -o docker0 -j ACCEPT
+iptables -A FORWARD -i docker0 ! -o docker0 -j ACCEPT
 # By default allow all outgoing traffic
-#iptables -A FORWARD -i docker0 -o docker0 -j ACCEPT
+iptables -A FORWARD -i docker0 -o docker0 -j ACCEPT
  
 # Restart Docker daemon to use the new BRIDGE_NAME
 service docker restart
