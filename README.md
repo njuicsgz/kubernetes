@@ -11,31 +11,32 @@
 ```
 ##3. Install K8s by release tar file in master/minions
 ```
-    # tar xzf kubernetes.tar.gz -C /usr/local/
-    # cd /usr/local/kubernetes/server/
-    # tar xzf kubernetes-server-linux-amd64.tar.gz
-    # cp kubernetes/server/bin/* /opt/bin/
-    # cd /usr/local/kubernetes/cluster/ubuntu
-    # ./util.sh
+# tar xzf kubernetes.tar.gz -C /usr/local/
+# cd /usr/local/kubernetes/server/
+# tar xzf kubernetes-server-linux-amd64.tar.gz
+# cp kubernetes/server/bin/* /opt/bin/
+# cd /usr/local/kubernetes/cluster/ubuntu
+# ./util.sh
 ```
-    We need to disable auto start of some components by edit conf to comment those two lines (do it in minions only, no need to do this if you did not install etcd in minions):
-    kube-apiserver.conf           kube-controller-manager.conf   kube-scheduler.conf 
-    ```
-    # vi /etc/init/kube-apiserver.conf
-    # start on started etcd
-    # stop on stopping etcd
-    ```
-    Add change from 'etcd' to 'docker' for 'kube-proxy' and 'kubelet':
-    ```
-    start on started docker
-    stop on stopping docker
 
-    *So the restart dependency is like this:
-    [Master and Minions] docker->etcd->kube-apiserver/kube-controller-manager/kube-scheduler/kube-proxy/kubelet
-    [Minions] docker->kube-proxy/kubelet
+We need to disable auto start of some components by edit conf to comment those two lines (do it in minions only, no need to do this if you did not install etcd in minions):
+    kube-apiserver.conf           kube-controller-manager.conf   kube-scheduler.conf 
+```
+# vi /etc/init/kube-apiserver.conf
+# start on started etcd
+# stop on stopping etcd
+```
+Add change from 'etcd' to 'docker' for 'kube-proxy' and 'kubelet':
+```
+start on started docker
+stop on stopping docker
+```
+* So the restart dependency is like this:
+[Master and Minions] docker->etcd->kube-apiserver/kube-controller-manager/kube-scheduler/kube-proxy/kubelet
+[Minions] docker->kube-proxy/kubelet
     
-##4. Kube Master Conf
-    *4.1 \# cat /etc/default/etcd
+## 4. Kube Master Conf
+    * 4.1 # cat /etc/default/etcd
     ```
     ETCD_OPTS="-listen-client-urls=http://allen01:4001"
     ```
