@@ -3,7 +3,7 @@ FROM allen01:5000/u14-ssh-jdk1.7
 MAINTAINER PaaS/allen
 
 ENV ZK_ADDRESS 172.30.50.26:2181
-ENV MY_DIR /dianyi/app/walle/rdb-services
+ENV MY_DIR /dianyi/app/walle/walle-java
 
 ADD /bin/ $MY_DIR/bin/
 ADD /lib/ $MY_DIR/lib/
