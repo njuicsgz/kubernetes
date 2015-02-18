@@ -1,0 +1,33 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"rdb-service",
+      "labels":{
+         "name":"rdb-service"
+      }
+   },
+   "spec":{
+      "replicas":2,
+      "selector":{
+         "name":"rdb-service"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "name":"rdb-service"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"rdb-service",
+                  "image":"allen01:5000/facebook_pmd/rdb-services",
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}
