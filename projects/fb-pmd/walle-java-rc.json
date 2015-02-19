@@ -1,0 +1,33 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"walle-java",
+      "labels":{
+         "name":"walle-java"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"walle-java"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "name":"walle-java"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"walle-java",
+                  "image":"allen01:5000/facebook_pmd/walle-java",
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

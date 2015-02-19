@@ -1,0 +1,33 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"fbagent-service",
+      "labels":{
+         "name":"fbagent-service"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"fbagent-service"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "name":"fbagent-service"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"fbagent-service",
+                  "image":"allen01:5000/facebook_pmd/fbagent-services",
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

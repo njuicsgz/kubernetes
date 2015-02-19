@@ -1,0 +1,33 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"scheduler",
+      "labels":{
+         "name":"scheduler"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"scheduler"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "name":"scheduler"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"scheduler",
+                  "image":"allen01:5000/facebook_pmd/scheduler",
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

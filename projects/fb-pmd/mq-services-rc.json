@@ -1,0 +1,33 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"mq-service",
+      "labels":{
+         "name":"mq-service"
+      }
+   },
+   "spec":{
+      "replicas": 1,
+      "selector":{
+         "name":"mq-service"
+      },
+      "template":{
+         "metadata":{
+            "labels":{
+               "name":"mq-service"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"mq-service",
+                  "image":"allen01:5000/facebook_pmd/mq-services",
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}
