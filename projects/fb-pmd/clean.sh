@@ -13,3 +13,4 @@ kubectl delete replicationController fbagent-service
 kubectl delete replicationController scheduler
 kubectl delete replicationController walle-java
 kubectl delete replicationController rdb-service
+kubectl delete service walle-java
