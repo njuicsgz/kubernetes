@@ -3,6 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"rdb-service",
+      "namespace": "facebook-pmd",
       "labels":{
          "name":"rdb-service"
       }
@@ -14,6 +15,7 @@
       },
       "template":{
          "metadata":{
+	    "namespace": "facebook-pmd",
             "labels":{
                "name":"rdb-service"
             }

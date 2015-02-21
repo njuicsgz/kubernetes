@@ -2,6 +2,7 @@
    "kind":"Service",
    "apiVersion":"v1beta3",
    "metadata":{
+      "namespace": "facebook-pmd",
       "name":"walle-java",
       "labels":{
          "name":"walle-java"

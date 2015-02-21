@@ -1,5 +1,6 @@
 #!/bin/bash
 
+kubecfg ns facebook-pmd
 kubectl create -f fbagent-service-rc.json
 kubectl create -f mq-services-rc.json
 kubectl create -f rdb-rc.json

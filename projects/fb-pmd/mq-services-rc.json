@@ -3,6 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"mq-service",
+      "namespace": "facebook-pmd",
       "labels":{
          "name":"mq-service"
       }
@@ -14,6 +15,7 @@
       },
       "template":{
          "metadata":{
+	    "namespace": "facebook-pmd",
             "labels":{
                "name":"mq-service"
             }
