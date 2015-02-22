@@ -1,0 +1,43 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"dubbo-monitor-svc",
+      "namespace": "facebook-pmd",
+      "labels":{
+         "name":"dubbo-monitor-svc"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"dubbo-monitor-svc"
+      },
+      "template":{
+         "metadata":{
+	    "namespace": "facebook-pmd",
+            "labels":{
+               "name":"dubbo-monitor-svc"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"dubbo-monitor-svc",
+                  "image":"allen01:5000/facebook_pmd/dubbo-monitor-svc",
+                  "ports":[
+		     {
+                        "containerPort":8080,
+                        "protocol":"TCP"
+                     },
+                     {
+                        "containerPort":7070,
+                        "protocol":"TCP"
+                     },
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

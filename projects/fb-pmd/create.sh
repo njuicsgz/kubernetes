@@ -7,3 +7,5 @@ kubectl create -f rdb-rc.json
 kubectl create -f scheduler-rc.json
 kubectl create -f walle-java-rc.json
 kubectl create -f walle-java-svc.json
+kubectl create -f dubbo-monitor-svc-rc.json
+kubectl create -f dubbo-monitor-svc-svc.json
