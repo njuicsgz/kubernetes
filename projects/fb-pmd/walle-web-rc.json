@@ -2,29 +2,29 @@
    "kind":"ReplicationController",
    "apiVersion":"v1beta3",
    "metadata":{
-      "name":"rdb-service",
+      "name":"walle-web",
       "namespace": "facebook-pmd",
       "labels":{
-         "name":"rdb-service"
+         "name":"walle-web"
       }
    },
    "spec":{
       "replicas":1,
       "selector":{
-         "name":"rdb-service"
+         "name":"walle-web"
       },
       "template":{
          "metadata":{
 	    "namespace": "facebook-pmd",
             "labels":{
-               "name":"rdb-service"
+               "name":"walle-web"
             }
          },
          "spec":{
             "containers":[
                {
-                  "name":"rdb-service",
-                  "image":"allen01:5000/facebook_pmd/rdb-services",
+                  "name":"walle-web",
+                  "image":"allen01:5000/facebook_pmd/walle-web",
                   "ports":[
                   ]
                }

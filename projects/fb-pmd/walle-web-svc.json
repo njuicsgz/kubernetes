@@ -1,0 +1,21 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "facebook-pmd",
+      "name":"walle-web",
+      "labels":{
+         "name":"walle-web"
+      }
+   },
+   "spec":{
+      "port":40080,
+      "containerPort":80,
+      "publicIPs": ["172.30.50.78"],
+      "protocol":"TCP",
+      "selector":{
+         "name":"walle-web"
+      }
+   }
+}
+
