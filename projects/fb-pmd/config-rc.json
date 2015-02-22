@@ -1,0 +1,35 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"config",
+      "namespace": "facebook-pmd",
+      "labels":{
+         "name":"config"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"config"
+      },
+      "template":{
+         "metadata":{
+	    "namespace": "facebook-pmd",
+            "labels":{
+               "name":"config"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"config",
+                  "image":"allen01:5000/facebook_pmd/config",
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

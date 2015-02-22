@@ -1,0 +1,21 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "facebook-pmd",
+      "name":"config",
+      "labels":{
+         "name":"config"
+      }
+   },
+   "spec":{
+      "port":48082,
+      "containerPort":8080,
+      "publicIPs": ["172.30.50.78"],
+      "protocol":"TCP",
+      "selector":{
+         "name":"config"
+      }
+   }
+}
+
