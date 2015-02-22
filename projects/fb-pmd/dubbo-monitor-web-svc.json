@@ -1,0 +1,21 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "facebook-pmd",
+      "name":"dubbo-monitor-web",
+      "labels":{
+         "name":"dubbo-monitor-web"
+      }
+   },
+   "spec":{
+      "port":48081,
+      "containerPort":8080,
+      "publicIPs": ["172.30.50.78"],
+      "protocol":"TCP",
+      "selector":{
+         "name":"dubbo-monitor-web"
+      }
+   }
+}
+

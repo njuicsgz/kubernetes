@@ -1,0 +1,35 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"dubbo-monitor-web",
+      "namespace": "facebook-pmd",
+      "labels":{
+         "name":"dubbo-monitor-web"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"dubbo-monitor-web"
+      },
+      "template":{
+         "metadata":{
+	    "namespace": "facebook-pmd",
+            "labels":{
+               "name":"dubbo-monitor-web"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"dubbo-monitor-web",
+                  "image":"allen01:5000/facebook_pmd/dubbo-monitor-web",
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}
