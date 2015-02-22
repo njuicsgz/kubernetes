@@ -9,3 +9,5 @@ kubectl create -f walle-java-rc.json
 kubectl create -f walle-java-svc.json
 kubectl create -f dubbo-monitor-svc-rc.json
 kubectl create -f dubbo-monitor-svc-svc.json
+kubectl create -f dubbo-monitor-web-rc.json
+kubectl create -f dubbo-monitor-web-svc.json
