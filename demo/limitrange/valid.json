@@ -1,0 +1,41 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "facebook-pmd",
+      "name":"mq-service",
+      "labels":{
+         "name":"mq-service"
+      }
+   },
+   "spec":{
+      "replicas": 4,
+      "selector":{
+         "name":"mq-service"
+      },
+      "template":{
+         "metadata":{
+            "namespace": "facebook-pmd",
+            "labels":{
+               "name":"mq-service"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"mq-service",
+                  "image":"allen01:5000/facebook_pmd/mq-services",
+		  "resources": {
+		       "limits": {
+		            "cpu": "1",
+		            "memory": "1Gi",
+			}
+	          },
+                  "ports":[
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

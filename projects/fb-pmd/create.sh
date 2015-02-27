@@ -1,6 +1,8 @@
 #!/bin/bash
 
-kubecfg ns facebook-pmd
+kubectl config set current-context my-context
+kubectl config set-context my-context --namespace=facebook-pmd
+#kubecfg ns facebook-pmd
 kubectl create -f fbagent-service-rc.json
 kubectl create -f mq-services-rc.json
 kubectl create -f rdb-rc.json

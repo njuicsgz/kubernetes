@@ -1,0 +1,12 @@
+{
+  "apiVersion":"v1beta3",  
+  "kind": "Namespace",
+  "metadata": {
+    "name": "facebook-pmd",
+  },
+  "spec": {},
+  "labels": {
+    "name": "facebook-pmd",
+    "env": "test"
+  },  
+}
