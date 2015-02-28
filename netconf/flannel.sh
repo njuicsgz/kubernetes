@@ -4,6 +4,7 @@ killall flanneld
 killall docker
 
 service etcd restart
+iptables -t nat -F
 flanneld -etcd-endpoints=http://allen01:4001 > /dev/null 2>&1 &
 sleep 1
 source /run/flannel/subnet.env
