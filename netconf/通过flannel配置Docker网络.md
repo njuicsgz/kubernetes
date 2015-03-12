@@ -1,6 +1,7 @@
 ## Reference:
 * https://coreos.com/docs/distributed-configuration/etcd-api/
 * https://github.com/coreos/flannel
+
 ## 0. should install go before build flannel
 ```
 # tar -C /usr/local -xzf go1.4.1.linux-amd64.tar.gz
