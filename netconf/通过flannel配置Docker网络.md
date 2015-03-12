@@ -1,8 +1,12 @@
 ## Reference:
 * https://coreos.com/docs/distributed-configuration/etcd-api/
 * https://github.com/coreos/flannel
-
-## 1. flannel install on all docker hosts
+## 0. should install go before build flannel
+```
+# tar -C /usr/local -xzf go1.4.1.linux-amd64.tar.gz
+# export PATH=$PATH:/usr/local/go/bin
+```
+## 1. flannel install on one host and scp to all other docker hosts
 ```
 # sudo apt-get install linux-libc-dev
 # git clone https://github.com/coreos/flannel.git
