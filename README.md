@@ -2,12 +2,10 @@
     same with another chapter "K8s All-In-One"
 ##2. Etcd install in master node
 ```
-# wget https://github.com/coreos/etcd/releases/download/v2.0.0/etcd-v2.0.0-linux-amd64.tar.gz
-# tar -C /usr/local -xzf etcd-v2.0.0-linux-amd64.tar.gz 
-# mkdir -p /opt/bin
-# cp /usr/local/etcd-v2.0.0-linux-amd64/etcd /opt/bin/
-# export PATH=$PATH:/opt/bin
-# service etcd start <Should start etcd before K8s installation, Or all K8s service will started automatically which is a All-In-One case>
+# root@pdm-165:~/paas/setup# curl -L  https://github.com/coreos/etcd/releases/download/v2.0.5/etcd-v2.0.5-linux-amd64.tar.gz
+# tar -C /usr/local -xzf etcd-v2.0.5-linux-amd64.tar.gz 
+# export PATH=$PATH://usr/local/etcd-v2.0.5-linux-amd64/
+# ./etcd --listen-client-urls=http://172.30.10.165:4001 --data-dir=/root/etcd-data > /dev/null 2>&1 &
 ```
 ##3. Install K8s by release tar file in master/minions
 ```
