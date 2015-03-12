@@ -50,7 +50,8 @@ root@allen01:~# docker -d --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU}
 * 4.1 Containers of differrent host can ping each other
 * 4.2 Containers has route to access public IP, e.g. ping qq.com
 ```
-If you cannot ping qq.com, it may be the masquerade error. Please reflush the nat table with iptables -t nat -F and restart docker and the container can access the outside world.
+If you cannot ping qq.com, it may be the masquerade error. 
+Please reflush the nat table with 'iptables -t nat -F' and restart docker and the container can access the outside world.
 ```
 
 
