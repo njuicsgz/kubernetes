@@ -1,5 +1,10 @@
 ##1. Docker install in all nodes
-    same with another chapter "K8s All-In-One"
+If you have ubuntu14.04 with kernel 3.13:
+https://docs.docker.com/installation/ubuntulinux/#ubuntu-trusty-1404-lts-64-bit
+```
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+# curl -sSL https://get.docker.com/ubuntu/ | sudo sh
+```
 ##2. Etcd install in master node
 ```
 # root@pdm-165:~/paas/setup# curl -L  https://github.com/coreos/etcd/releases/download/v2.0.5/etcd-v2.0.5-linux-amd64.tar.gz
