@@ -12,64 +12,64 @@ https://docs.docker.com/installation/ubuntulinux/#ubuntu-trusty-1404-lts-64-bit
 # export PATH=$PATH://usr/local/etcd-v2.0.5-linux-amd64/
 # ./etcd --listen-client-urls=http://172.30.10.165:4001 --data-dir=/root/etcd-data > /dev/null 2>&1 &
 ```
-##3. Install K8s by release tar file in master/minions
+##3. Install K8s by release tar file in master
 ```
 # tar xzf kubernetes.tar.gz -C /usr/local/
 # cd /usr/local/kubernetes/server/
 # tar xzf kubernetes-server-linux-amd64.tar.gz
 # cp kubernetes/server/bin/* /opt/bin/
+
 # cd /usr/local/kubernetes/cluster/ubuntu
-# ./util.sh
+# cp initd_scripts/* /etc/init.d/
+# cp default_scripts/* /etc/default/
+# cp init_conf/* /etc/init
+```
+And scp all needed files to minions from master
+```
+# scp /opt/bin/kubelet /opt/bin/kube-proxy root@172.30.10.166:/opt/bin/
+# scp /etc/default/kubelet /etc/default/kube-proxy  root@172.30.10.166:/etc/default/
+# scp /etc/init.d/kubelet /etc/init.d/kube-proxy   root@172.30.10.166:/etc/init.d/
+# scp /etc/init/kube-proxy.conf  /etc/init/kubelet.conf    root@172.30.10.166:/etc/init/
 ```
 
-We need to disable auto start of some components by edit conf to comment those two lines (do it in minions only, no need to do this if you did not install etcd in minions):
-    kube-apiserver.conf           kube-controller-manager.conf   kube-scheduler.conf 
-```
-# vi /etc/init/kube-apiserver.conf
-# start on started etcd
-# stop on stopping etcd
-```
-Add change from 'etcd' to 'docker' for 'kube-proxy' and 'kubelet':
-```
-start on started docker
-stop on stopping docker
-```
-So the restart dependency is like this:
-* [Master and Minions] docker->etcd->kube-apiserver/kube-controller-manager/kube-scheduler/kube-proxy/kubelet
-* [Minions] docker->kube-proxy/kubelet
-    
 ## 4. Kube Master Conf
-* 4.1 # cat /etc/default/etcd
-
-```
-ETCD_OPTS="-listen-client-urls=http://allen01:4001"
-```
-  
 * 4.2 reconfig master conf and start services       
     ```
-root@allen01:~\# cat /etc/default/kube-apiserver 
-    KUBE_APISERVER_OPTS="--address=0.0.0.0 \
-    --port=8080 \
-    --kubelet_port=10250 \
-    --etcd_servers=http://172.30.50.78:4001 \
-    --logtostderr=true \
-    --portal_net=10.0.10.0/24"
+# cat /etc/default/kube-apiserver 
+KUBE_APISERVER_OPTS="--address=0.0.0.0 \
+--v=0 \
+--port=8080 \
+--tls_cert_file=/root/github/kubernetes/demo/Auth/ssl-cert/server.crt \
+--tls_private_key_file=/root/github/kubernetes/demo/Auth/ssl-cert/server.key \
+--authorization_mode=ABAC \
+--token_auth_file=/root/github/kubernetes/demo/Auth/known_tokens.csv \
+--authorization_policy_file=/root/github/kubernetes/demo/Auth/authz_policy.json \
+--kubelet_port=10250 \
+--etcd_servers=http://172.30.50.78:4001 \
+--logtostderr=true \
+--runtime_config=api/v1beta3 \
+#--admission_control=NamespaceExists,LimitRanger,ResourceQuota \
+--portal_net=10.0.10.0/24"
+# service kube-apiserver start
 ```
 ```
-root@allen01:~\# cat /etc/default/kube-scheduler 
+# cat /etc/default/kube-scheduler 
   KUBE_SCHEDULER_OPTS="--logtostderr=true \
   --master=172.30.50.78:8080"
+# service kube-scheduler start
 ```
 ```
-root@allen01:~\# cat /etc/default/kube-controller-manager 
+# cat /etc/default/kube-controller-manager 
   KUBE_CONTROLLER_MANAGER_OPTS="--master=172.30.50.78:8080 \
   --machines=172.30.50.87,172.30.50.88,172.30.50.78 \
   --logtostderr=true"
+# service kube-controller-manager start
 ```
 ```
-root@allen01:~\# cat /etc/default/kube-proxy   
+# cat /etc/default/kube-proxy   
     KUBE_PROXY_OPTS="--etcd_servers=http://172.30.50.78:4001 \
    --logtostderr=true"
+# service kube-proxy start
 ```
 ```
 root@allen01:~\# cat /etc/default/kubelet  
@@ -78,7 +78,7 @@ root@allen01:~\# cat /etc/default/kubelet
    --hostname_override=172.30.50.78 \
    --etcd_servers=http://172.30.50.78:4001 \
    --logtostderr=true"
-# service etcd restart   (restart all components of Kube)
+# service kubelet start
 ```
 
 ##5. Kube Minior * 2
