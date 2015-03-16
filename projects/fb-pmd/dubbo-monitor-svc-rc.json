@@ -25,6 +25,9 @@
                {
                   "name":"dubbo-monitor-svc",
                   "image":"allen01:5000/facebook_pmd/dubbo-monitor-svc",
+                  "env":[
+                        {"name": "ZK_ADDRESS", "value": "172.30.50.26:2181"}
+                  ],
                   "ports":[
 		     {
                         "containerPort":8080,

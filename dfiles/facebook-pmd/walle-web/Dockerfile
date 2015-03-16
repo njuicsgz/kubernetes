@@ -2,15 +2,13 @@ FROM allen01:5000/paas/u14-ssh-nginx1.4.6
 
 MAINTAINER PaaS/allen
 
-ENV ZK_ADDRESS 172.30.50.26:2181
+ENV TAR_FILE walle-web.tar.gz
 ENV NGINX_DIR /etc/nginx
-ENV TARGET_DIR /ndp/app/walle-web
-
-RUN echo "export ZK_ADDRESS=${ZK_ADDRESS}" >> /etc/profile
+ENV TARGET_DIR /ndp/app
 
 # copy file
 WORKDIR $TARGET_DIR/
-ADD /walle-web $TARGET_DIR/
+ADD /$TAR_FILE $TARGET_DIR/
 
 # modify nginx conf
 WORKDIR $NGINX_DIR/

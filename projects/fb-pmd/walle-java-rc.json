@@ -25,6 +25,9 @@
                {
                   "name":"walle-java",
                   "image":"allen01:5000/facebook_pmd/walle-java",
+                  "env":[
+                        {"name": "ZK_ADDRESS", "value": "172.30.50.26:2181"}
+                  ],
                   "ports":[
                   ]
                }
