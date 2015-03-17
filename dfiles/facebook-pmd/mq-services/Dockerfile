@@ -2,7 +2,7 @@ FROM allen01:5000/u14-ssh-jdk1.7
 
 MAINTAINER PaaS/allen
 
-ENV TAR_FILE mq-services_0.1-SNAPSHOT.tar.gz 
+ENV TAR_FILE mq-services_0.1-SNAPSHOT.tar
 ENV MY_DIR /dianyi/app/walle/mq-services
 
 ADD /$TAR_FILE $MY_DIR/
