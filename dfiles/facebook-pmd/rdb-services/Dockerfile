@@ -3,7 +3,7 @@ FROM allen01:5000/u14-ssh-jdk1.7
 MAINTAINER PaaS/allen
 
 ENV MY_DIR /dianyi/app/walle/rdb-services
-ENV SRC_FILE rdb-services_0.1-SNAPSHOT.tar.gz
+ENV SRC_FILE rdb-services_0.1-SNAPSHOT.tar
 
 ADD /$SRC_FILE $MY_DIR/
 
