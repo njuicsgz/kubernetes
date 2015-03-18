@@ -9,6 +9,7 @@ ADD /$TAR_FILE $MY_DIR/
 
 WORKDIR $MY_DIR/bin
 RUN chmod +x *.sh
+RUN sed -i 's/springboot >/springbootweb >/g' start.sh
 RUN sed -i 's/-Xms2g/-Xms512m/g' start.sh
 RUN echo 'while true; do sleep 10; done' >> start.sh
 

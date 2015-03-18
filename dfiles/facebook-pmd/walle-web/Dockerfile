@@ -2,7 +2,7 @@ FROM allen01:5000/paas/u14-ssh-nginx1.4.6
 
 MAINTAINER PaaS/allen
 
-ENV TAR_FILE walle-web.tar.gz
+ENV TAR_FILE walle-web.tar
 ENV NGINX_DIR /etc/nginx
 ENV TARGET_DIR /ndp/app
 

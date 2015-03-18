@@ -11,6 +11,7 @@
    "spec":{
       "port":9999,
       "containerPort":9999,
+      "publicIPs": ["172.30.50.78"],
       "protocol":"TCP",
       "selector":{
          "name":"walle-java"
