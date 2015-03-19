@@ -1,4 +1,4 @@
-{
+{                                                                                                                                                     
    "kind":"Service",
    "apiVersion":"v1beta3",
    "metadata":{
@@ -6,16 +6,17 @@
       "name":"walle-java",
       "labels":{
          "name":"walle-java"
-      }
-   },
+      }   
+   },  
    "spec":{
-      "port":9999,
+      "port":49999,
       "containerPort":9999,
-      "publicIPs": ["172.30.50.78"],
+      "publicIPs": [
+          "172.30.50.78"
+                    ],  
       "protocol":"TCP",
       "selector":{
          "name":"walle-java"
-      }
-   }
+      }   
+   }   
 }
-

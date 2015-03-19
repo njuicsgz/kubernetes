@@ -26,7 +26,8 @@
                   "name":"fbagent-service",
                   "image":"allen01:5000/facebook_pmd/fbagent-services",
                   "env":[
-                        {"name": "ZK_ADDRESS", "value": "172.30.50.26:2181"}
+                        {"name": "ZK_ADDRESS", "value": "172.30.50.26:2181"},
+			{"name": "BROKER_LIST", "value": "172.30.50.26:9092,172.30.50.34:9092"}
                   ],
                   "ports":[
                   ]
