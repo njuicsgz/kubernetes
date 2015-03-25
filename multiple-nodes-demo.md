@@ -76,7 +76,8 @@ root@allen01:~\# cat /etc/default/kubelet
    KUBELET_OPTS="--address=172.30.50.78 \
    --port=10250 \
    --hostname_override=172.30.50.78 \
-   --etcd_servers=http://172.30.50.78:4001 \
+   --api_servers=172.30.50.78:8080 \
+   #--etcd_servers=http://172.30.50.78:4001 \ use api_servers instead of etcd_servicers for ver>0.12.0
    --logtostderr=true"
 # service kubelet start
 ```
@@ -91,7 +92,8 @@ root@allen01:~\# cat /etc/default/kubelet
   KUBELET_OPTS="--address=172.30.50.87 \
   --port=10250 \
   --hostname_override=172.30.50.87 \
-  --etcd_servers=http://172.30.50.78:4001 \
+  --api_servers=172.30.50.78:8080 \
+  #--etcd_servers=http://172.30.50.78:4001 \ use api_servers instead of etcd_servicers for ver>0.12.0
   --logtostderr=true"
 ```
 
