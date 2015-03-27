@@ -9,8 +9,10 @@ https://docs.docker.com/installation/ubuntulinux/#ubuntu-trusty-1404-lts-64-bit
 ```
 # root@pdm-165:~/paas/setup# curl -L  https://github.com/coreos/etcd/releases/download/v2.0.5/etcd-v2.0.5-linux-amd64.tar.gz
 # tar -C /usr/local -xzf etcd-v2.0.5-linux-amd64.tar.gz 
-# export PATH=$PATH://usr/local/etcd-v2.0.5-linux-amd64/
-# ./etcd --listen-client-urls=http://172.30.10.165:4001 --data-dir=/root/etcd-data > /dev/null 2>&1 &
+# mkdir -p /opt/bin/
+# cp /usr/local/etcd-v2.0.5-linux-amd64/etcd /opt/bin/
+# export PATH=$PATH:/opt/bin/
+# etcd --listen-client-urls=http://172.30.10.165:4001 --data-dir=/root/etcd-data > /dev/null 2>&1 &
 ```
 ##3. Install K8s by release tar file in master
 ```
@@ -39,17 +41,17 @@ And scp all needed files to minions from master
 KUBE_APISERVER_OPTS="--address=0.0.0.0 \
 --v=0 \
 --port=8080 \
---tls_cert_file=/root/github/kubernetes/demo/Auth/ssl-cert/server.crt \
---tls_private_key_file=/root/github/kubernetes/demo/Auth/ssl-cert/server.key \
---authorization_mode=ABAC \
---token_auth_file=/root/github/kubernetes/demo/Auth/known_tokens.csv \
---authorization_policy_file=/root/github/kubernetes/demo/Auth/authz_policy.json \
+#--tls_cert_file=/root/github/kubernetes/demo/Auth/ssl-cert/server.crt \
+#--tls_private_key_file=/root/github/kubernetes/demo/Auth/ssl-cert/server.key \
+#--authorization_mode=ABAC \
+#--token_auth_file=/root/github/kubernetes/demo/Auth/known_tokens.csv \
+#--authorization_policy_file=/root/github/kubernetes/demo/Auth/authz_policy.json \
 --kubelet_port=10250 \
---etcd_servers=http://172.30.50.78:4001 \
+--etcd_servers=http://172.30.10.122:4001 \
 --logtostderr=true \
 --runtime_config=api/v1beta3 \
 #--admission_control=NamespaceExists,LimitRanger,ResourceQuota \
---portal_net=10.0.10.0/24"
+--portal_net=10.55.0.0/24"
 # service kube-apiserver start
 ```
 ```
@@ -67,13 +69,13 @@ KUBE_APISERVER_OPTS="--address=0.0.0.0 \
 ```
 ```
 # cat /etc/default/kube-proxy   
-    KUBE_PROXY_OPTS="--etcd_servers=http://172.30.50.78:4001 \
+    KUBE_PROXY_OPTS="--master==172.30.50.78:8080 \
    --logtostderr=true"
 # service kube-proxy start
 ```
 ```
-root@allen01:~\# cat /etc/default/kubelet  
-   KUBELET_OPTS="--address=172.30.50.78 \
+root@allen01:~\# cat /etc/default/kubelet
+   KUBELET_OPTS="--address=0.0.0.0 \
    --port=10250 \
    --hostname_override=172.30.50.78 \
    --api_servers=172.30.50.78:8080 \
@@ -85,7 +87,7 @@ root@allen01:~\# cat /etc/default/kubelet
 ##5. Kube Minior * 2
 ```
   root@allen02:~/demo/1+N/netconf\# cat /etc/default/kube-proxy
-  KUBE_PROXY_OPTS="--etcd_servers=http://172.30.50.78:4001 \
+  KUBE_PROXY_OPTS="--master==172.30.50.78:8080 \
   --logtostderr=true"
 
   root@allen02:~/demo/1+N/netconf\# cat /etc/default/kubelet
