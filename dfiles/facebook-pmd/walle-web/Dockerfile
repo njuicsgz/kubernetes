@@ -1,4 +1,4 @@
-FROM allen01:5000/paas/u14-ssh-nginx1.4.6
+FROM xa.repo.ndp.com:5000/paas/u14-ssh-nginx1.4.6
 
 MAINTAINER PaaS/allen
 

@@ -2,28 +2,34 @@
 export PATH=/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin 
 export WORKDIR=$( cd ` dirname $0 ` && pwd ) 
 
-cd fbagent-services || exit
-docker build -t allen01:5000/facebook_pmd/fbagent-services .
-docker push allen01:5000/facebook_pmd/fbagent-services
-cd ..
+if [ $# -eq 1 ]; then
+    version=$1
+else
+    echo "must specify a version, exit"
+    exit 1
+fi
 
-cd mq-services || exit
-docker build -t allen01:5000/facebook_pmd/mq-services .
-docker push allen01:5000/facebook_pmd/mq-services
-cd ..
+build_img()
+{
+    local tar_dir=$1
+    local img_name=$1
 
-cd rdb-services || exit
-docker build -t allen01:5000/facebook_pmd/rdb-services .
-docker push allen01:5000/facebook_pmd/rdb-services
-cd ..
+    cd ${tar_dir} || exit
+    docker build -t xa.repo.ndp.com:5000/facebook_pmd/${img_name}:${version} .
+    docker push xa.repo.ndp.com:5000/facebook_pmd/${img_name}:${version}
+    cd ..
+}
 
-cd walle || exit
-docker build -t allen01:5000/facebook_pmd/walle-java .
-docker push allen01:5000/facebook_pmd/walle-java
-cd ..
+echo "begin build images with version: ${version}..."
 
-cd scheduler || exit
-docker build -t allen01:5000/facebook_pmd/scheduler .
-docker push allen01:5000/facebook_pmd/scheduler
-cd ..
+#build_img fbagent-services
+#build_img mq-services
+#build_img rdb-services
+#build_img walle-java
+build_img walle-web
+#build_img config
+#build_img dubbo-monitor-svc
+#build_img dubbo-monitor-web
+#build_img scheduler
 
+echo "build finished"

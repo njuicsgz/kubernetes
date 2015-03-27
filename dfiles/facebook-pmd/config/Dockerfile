@@ -1,4 +1,4 @@
-FROM allen01:5000/paas/u14-ssh-jdk7-tomcat7
+FROM xa.repo.ndp.com:5000/paas/u14-ssh-jdk7-tomcat7
 
 MAINTAINER PaaS/allen
 
