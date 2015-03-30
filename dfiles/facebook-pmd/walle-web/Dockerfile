@@ -15,5 +15,5 @@ WORKDIR $NGINX_DIR/
 ADD /test.facebook.yeahmobi.com.conf $NGINX_DIR/conf.d/
 RUN rm -f sites-enabled/*
 
-
-CMD service nginx start; /usr/sbin/sshd -D;
+ADD /paas-bootstrap.sh /
+CMD bash /paas-bootstrap.sh

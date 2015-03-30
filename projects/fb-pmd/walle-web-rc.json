@@ -26,7 +26,8 @@
                   "name":"walle-web",
                   "image":"xa.repo.ndp.com:5000/facebook_pmd/walle-web:v1.0.3",
                   "env":[
-                        {"name": "ZK_ADDRESS", "value": "172.30.10.122:2181"}
+                        {"name": "ZK_ADDRESS", "value": "172.30.10.122:2181"},
+                        {"name": "WALLE_JAVA_ADDRESS", "value": "172.30.10.122:49999"}
                   ],
                   "ports":[
                   ]
