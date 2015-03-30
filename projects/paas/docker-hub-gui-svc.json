@@ -1,0 +1,21 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "paas",
+      "name":"registry-ui",
+      "labels":{
+         "name":"registry-ui"
+      }
+   },
+   "spec":{
+      "port":28080,
+      "containerPort":8080,
+      "publicIPs": ["172.30.10.185"],
+      "protocol":"TCP",
+      "selector":{
+         "name":"registry-ui"
+      }
+   }
+}
+

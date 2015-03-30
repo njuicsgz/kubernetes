@@ -1,0 +1,39 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"registry-ui",
+      "namespace": "paas",
+      "labels":{
+         "name":"registry-ui"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"registry-ui"
+      },
+      "template":{
+         "metadata":{
+	    "namespace": "paas",
+            "labels":{
+               "name":"registry-ui"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"registry",
+                  "image":"xa.repo.ndp.com:5000/paas/docker-registry-ui",
+                  "ports":[
+                      "containerPort": 8080
+                  ],
+                  "env":[
+                      {"name": "REG1", "value": "http://172.30.10.185:5000/v1/"}
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}
