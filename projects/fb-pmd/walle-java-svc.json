@@ -12,7 +12,7 @@
       "port":49999,
       "containerPort":9999,
       "publicIPs": [
-          "172.30.50.78"
+          "172.30.10.185"
                     ],  
       "protocol":"TCP",
       "selector":{

@@ -11,7 +11,7 @@
    "spec":{
       "port":48082,
       "containerPort":8080,
-      "publicIPs": ["172.30.50.78"],
+      "publicIPs": ["172.30.10.185"],
       "protocol":"TCP",
       "selector":{
          "name":"config"

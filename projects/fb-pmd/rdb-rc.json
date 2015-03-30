@@ -24,9 +24,9 @@
             "containers":[
                {
                   "name":"rdb-service",
-                  "image":"allen01:5000/facebook_pmd/rdb-services",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/rdb-services:v1.0.3",
                   "env":[
-                        {"name": "ZK_ADDRESS", "value": "172.30.50.26:2181"}
+                        {"name": "ZK_ADDRESS", "value": "172.30.10.122:2181"}
                   ],
                   "ports":[
                   ]
