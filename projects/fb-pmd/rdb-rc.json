@@ -26,7 +26,7 @@
                   "name":"rdb-service",
                   "image":"xa.repo.ndp.com:5000/facebook_pmd/rdb-services:v1.0.3",
                   "env":[
-                        {"name": "ZK_ADDRESS", "value": "172.30.10.122:2181"}
+                        {"name": "ZK_ADDRESS", "value": "172.30.10.185:2181"}
                   ],
                   "ports":[
                   ]
