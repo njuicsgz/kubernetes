@@ -21,10 +21,16 @@
             }
          },
          "spec":{
+            "volumes": [
+                {"name": "host-log", "hostPath": {"path": "/dianyi/logs/mq-services"}}
+            ],
             "containers":[
                {
                   "name":"mq-service",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/mq-services:v1.0.3",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/mq-services:v1.0.6",
+                  "volumeMounts": [
+                       {"name": "host-log", "mountPath": "/dianyi/log"}
+                  ],
                   "env":[
                         {"name": "ZK_ADDRESS", "value": "172.30.10.185:2181"}
                   ],

@@ -21,10 +21,16 @@
             }
          },
          "spec":{
+            "volumes": [
+               {"name": "host-log", "hostPath": {"path": "/dianyi/logs/dubbo-monitor-svc"}}
+            ],
             "containers":[
                {
                   "name":"dubbo-monitor-svc",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/dubbo-monitor-svc:v1.0.3",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/dubbo-monitor-svc:v1.0.6",
+                  "volumeMounts": [
+                       {"name": "host-log", "mountPath": "/dianyi/app/walle/dubbo-monitor-svc/logs"}
+                  ],
                   "env":[
                         {"name": "ZK_ADDRESS", "value": "172.30.10.185:2181"}
                   ],

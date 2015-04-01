@@ -24,7 +24,7 @@
             "containers":[
                {
                   "name":"config",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/config:v1.0.3",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/config:v1.0.6",
                   "env":[
                         {"name": "ZK_ADDRESS", "value": "172.30.10.185:2181"},
                         {"name": "database_url", "value": "jdbc:mysql://172.30.10.77:3306/pmdr-config-test?useUnicode=true&amp;characterEncoding=UTF-8"},

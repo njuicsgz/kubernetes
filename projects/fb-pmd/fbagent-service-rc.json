@@ -21,10 +21,16 @@
             }
          },
          "spec":{
+             "volumes": [
+                {"name": "host-log", "hostPath": {"path": "/dianyi/logs/fbagent-service"}}
+            ],
             "containers":[
                {
                   "name":"fbagent-service",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/fbagent-services:v1.0.3",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/fbagent-services:v1.0.6",
+                  "volumeMounts": [
+                      {"name": "host-log", "mountPath": "/dianyi/log"}
+                  ],
                   "env":[
                         {"name": "ZK_ADDRESS", "value": "172.30.10.185:2181"},
 			{"name": "BROKER_LIST", "value": "172.30.50.26:9092,172.30.50.34:9092"}

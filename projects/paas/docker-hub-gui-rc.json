@@ -21,10 +21,16 @@
             }
          },
          "spec":{
+            "volumes": [
+                {"name": "host-log", "source": {"hostPath": "/tmp"}}
+            ],
             "containers":[
                {
                   "name":"registry",
                   "image":"xa.repo.ndp.com:5000/paas/docker-registry-ui",
+                  "volumeMounts": [
+                      {"name": "host-log", "mountPath": "/abc/log", "readOnly": false}
+                  ],
                   "ports":[
                       "containerPort": 8080
                   ],
