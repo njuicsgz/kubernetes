@@ -23,6 +23,8 @@ nohup ./etcd -name infra0 -initial-advertise-peer-urls ${MY_ADDR}:2380 \
       -initial-cluster infra0=${MY_ADDR}:2380,infra1=${PEER_ADDR1}:2380,infra2=${PEER_ADDR2}:2380 \
       -initial-cluster-state new > /dev/null 2>&1 &
 ```
+ps: Need to add http://127.0.0.1:4001 in listen-client-urls to allow etcdctl cmd. Theoretically, we should specify the etcd server with '--peers http://10.1.35.51:2379' when run etcdctl, unfornatly it failed.
+
 * node2:10.1.35.51
 ```
 root@AMZ-IAD-WallE-35-51:~/paas/script# cat etcd-restart.sh 
