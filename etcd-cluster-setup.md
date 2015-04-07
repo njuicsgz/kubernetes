@@ -1,6 +1,6 @@
 Setup etcd cluster of 3 nodes with version：v2.0.5:
 
-node1:10.1.35.50
+* node1:10.1.35.50
 ```
 root@AMZ-IAD-WallE-35-50:~/paas/script# cat etcd-restart.sh 
 #! /bin/bash
@@ -23,7 +23,7 @@ nohup ./etcd -name infra0 -initial-advertise-peer-urls ${MY_ADDR}:2380 \
       -initial-cluster infra0=${MY_ADDR}:2380,infra1=${PEER_ADDR1}:2380,infra2=${PEER_ADDR2}:2380 \
       -initial-cluster-state new > /dev/null 2>&1 &
 ```
-node2:10.1.35.51
+* node2:10.1.35.51
 ```
 root@AMZ-IAD-WallE-35-51:~/paas/script# cat etcd-restart.sh 
 #! /bin/bash                                                                                                                        
