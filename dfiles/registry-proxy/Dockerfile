@@ -8,9 +8,11 @@ ADD key.pem /etc/nginx/certs/key.pem
 ADD docker-registry.htpasswd /etc/nginx/docker-registry.htpasswd
 ADD docker-registry.conf /etc/nginx/conf.d/docker-registry.conf
 
+ADD bootstrap.sh /root/bootstrap.sh 
+
 RUN rm -f /etc/nginx/sites-enabled/default
 
 EXPOSE 443
 
 # should export env REGISTRY_ADDR before run this container
-CMD service nginx start; /usr/sbin/sshd -D 
+CMD /bin/bash /root/bootstrap.sh 

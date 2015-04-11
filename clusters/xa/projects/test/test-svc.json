@@ -1,0 +1,18 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "test",
+      "name":"registry-https",
+   },
+   "spec":{
+      "port":20443,
+      "containerPort":443,
+      "publicIPs": ["172.30.10.185"],
+      "protocol":"TCP",
+      "selector":{
+         "name":"registry-https"
+      }
+   }
+}
+
