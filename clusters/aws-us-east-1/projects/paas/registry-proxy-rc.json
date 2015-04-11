@@ -1,0 +1,39 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"registry-proxy",
+      "namespace": "paas",
+      "labels":{
+         "name":"registry-proxy"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"registry-proxy"
+      },
+      "template":{
+         "metadata":{
+      	    "namespace": "paas",
+            "labels":{
+               "name":"registry-proxy"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"registry-proxy",
+                  "image":"aws-us-east-1.repo.yeahmobi.com:25000/paas/nginx-registry-proxy:v1.0",
+                  "ports":[
+                      {"containerPort": 443}
+                  ],
+                  "env":[
+                      {"name": "REGISTRY_ADDR", "value": "10.1.35.51:25000"}
+                  ]
+               }
+            ]
+         }
+      }
+   }
+}

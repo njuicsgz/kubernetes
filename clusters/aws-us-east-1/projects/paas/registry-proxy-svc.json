@@ -1,0 +1,22 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "paas",
+      "name":"registry-proxy",
+      "labels":{
+         "name":"registry-proxy"
+      }
+   },
+   "spec":{
+      "port":20443,
+      "containerPort":443,
+      "portalIP": "172.21.0.43",
+      "publicIPs": ["54.172.120.251", "10.1.35.52"],
+      "protocol":"TCP",
+      "selector":{
+         "name":"registry-proxy"
+      }
+   }
+}
+
