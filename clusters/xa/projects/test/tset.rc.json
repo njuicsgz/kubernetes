@@ -1,0 +1,45 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"registry-https",
+      "namespace": "test",
+      "labels":{
+         "name":"registry-https"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"registry-https"
+      },
+      "template":{
+         "metadata":{
+	    "namespace": "test",
+            "labels":{
+               "name":"registry-https"
+            }
+         },
+         "spec":{
+           "volumes": [
+                 {"name": "host-log", "hostPath": {"path": "/tmp/etc/nginx"}}
+            ], 
+            "containers":[
+               {
+                  "name":"registry-proxy",
+                  "image":"xa.repo.ndp.com:5000/paas/nginx-registry-proxy2",
+                  "ports":[
+                      "containerPort": 443 
+                  ],
+                  "env": [
+                  {"name":"REGISTRY_PROXY", "value":"172.30.10.185:5000"}
+                    ],
+                  "volumeMounts": [
+                     {"name": "host-log", "mountPath": "/etc/nginx/"}
+                 ] 
+               },
+            ]
+         }
+      }
+   }
+}
