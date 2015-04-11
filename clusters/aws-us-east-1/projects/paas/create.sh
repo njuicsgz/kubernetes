@@ -8,3 +8,5 @@ kubectl create -f registry-svc.json
 sleep 2
 kubectl create -f registry-proxy-rc.json
 kubectl create -f registry-proxy-svc.json
+kubectl create -f registry-gui-rc.json
+kubectl create -f registry-gui-svc.json
