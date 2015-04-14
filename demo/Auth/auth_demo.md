@@ -48,11 +48,11 @@ KUBE_APISERVER_OPTS="--address=0.0.0.0 \
 
 root@allen01:~/github/kubernetes/demo/Auth# cat authz_policy.json 
 {"user":"admin"}
-{"user":"fb", "ns":"facebook-pmd"}
-{"user":"fb-r", "readonly":true, "ns":"facebook-pmd"}
-{"user":"fb-r-pod", "readonly": true, "ns": "facebook-pmd", "resource": "pods"}
-{"user":"test", "ns":"test"}
-{"user":"none-exist", "ns":"none-exist-ns"}
+{"user":"fb", "namespace":"facebook-pmd"}
+{"user":"fb-r", "readonly":true, "namespace":"facebook-pmd"}
+{"user":"fb-r-pod", "readonly": true, "namespace": "facebook-pmd", "resource": "pods"}
+{"user":"test", "namespace":"test"}
+{"user":"none-exist", "namespace":"none-exist-ns"}
 root@allen01:~/github/kubernetes/demo/Auth# cat known_tokens.csv
 myToken0,admin,8888
 myToken1,none-exist,1000
@@ -120,6 +120,8 @@ root@allen01:~/github/kubernetes/demo/1+N# kubectl delete -f web-service.json --
 webserver
 ```
 ### 4.6 NS内用户可以操作其它NS资源（bug？）
+* Comments: this problem is resolved by changing "ns" to "namespace" in the policy json file. 
+https://github.com/GoogleCloudPlatform/kubernetes/issues/6752
 ```
 root@allen01:~/github/kubernetes/demo/1+N# kubectl create -f web-service.json --server=https://k8s.paas.ndp.com:6443 --token=myToken4 --namespace=test
 webserver
@@ -130,8 +132,4 @@ webserver
 ```
 ##总结：
 * 1. 认证比较简单、没什么问题
-* 2. 鉴权还是有较多问题，比如4.6；另外，测试发现权限与authz_policy.json中各行的排列顺序也有关系。总的来说还未达到投入实际使用的标准。
-
-##建议：
-* 1. 不能依赖于k8s的鉴权模块，建议在API层面自己实现；
-* 2. 如果必须使用，那么还需要Code层面的调查，有必要的化进行二次开发
+* 2. 鉴权需要配置到文件中，增加、修改配置需要重启服务
