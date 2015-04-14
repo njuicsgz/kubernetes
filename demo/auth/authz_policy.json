@@ -1,0 +1,6 @@
+{"user":"admin"}
+{"user":"fb", "namespace":"facebook-pmd"}
+{"user":"fb-r", "readonly":true, "namespace":"facebook-pmd"}
+{"user":"fb-r-pod", "readonly": true, "namespace": "facebook-pmd", "resource": "pods"}
+{"user":"test", "namespace":"test"}
+{"user":"none-exist", "namespace":"none-exist-namespace"}

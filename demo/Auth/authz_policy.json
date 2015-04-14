@@ -1,6 +1,0 @@
-{"user":"admin"}
-{"user":"fb", "ns":"facebook-pmd"}
-{"user":"fb-r", "readonly":true, "ns":"facebook-pmd"}
-{"user":"fb-r-pod", "readonly": true, "ns": "facebook-pmd", "resource": "pods"}
-{"user":"test", "ns":"test"}
-{"user":"none-exist", "ns":"none-exist-ns"}
