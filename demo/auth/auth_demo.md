@@ -94,11 +94,6 @@ drwxr-xr-x  7 root root  4096 Feb  3 12:53 kubernetes/
 root@allen01:~/github/kubernetes/demo/1+N# kubectl get pod --server=https://k8s.paas.ndp.com:6443 --token=myToken-x --namespace=facebook-pmd  
 F0226 08:04:17.351595  116786 get.go:166] request [&{Method:GET URL:https://k8s.paas.ndp.com:6443/api/v1beta1/pods?namespace=facebook-pmd Proto:HTTP/1.1 ProtoMajor:1 ProtoMinor:1 Header:map[] Body:<nil> ContentLength:0 TransferEncoding:[] Close:false Host:k8s.paas.ndp.com:6443 Form:map[] PostForm:map[] MultipartForm:<nil> Trailer:map[] RemoteAddr: RequestURI: TLS:<nil>}] failed (401) 401 Unauthorized: Unauthorized
 ```
-### 4.2 认证过的token具有GET所有POD的权限-Read Only All
-```
-root@allen01:~/github/kubernetes/demo/1+N# kubectl get pod --server=https://k8s.paas.ndp.com:8443 --token=myToken1 --namespace=test
-POD                 IP                  CONTAINER(S)        IMAGE(S)            HOST                LABELS              STATUS
-```
 
 ###4.3 所有权用户具有所有权限-Admin
 ```
