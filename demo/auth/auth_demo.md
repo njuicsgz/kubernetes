@@ -64,6 +64,8 @@ root@allen01:~/github/kubernetes/demo/Auth# service kube-apiserver restart
 kube-apiserver stop/waiting
 kube-apiserver start/running, process 116632
 ```
+* So you can access by curl like this:
+root@paas-186:~# curl  --header "Authorization: Bearer myToken0" --cacert ~/.kubecfg.crt https://k8s.paas.ndp.com:6443/api/v1beta/namespaces/
 
 ##3. 配置 .kubernetes_auth
 ```
