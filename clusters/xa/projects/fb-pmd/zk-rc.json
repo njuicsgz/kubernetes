@@ -1,0 +1,33 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"zk",
+      "namespace": "facebook-pmd",
+      "labels":{
+         "name":"zk"
+      }
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"zk"
+      },
+      "template":{
+         "metadata":{
+	    "namespace": "facebook-pmd",
+            "labels":{
+               "name":"zk"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"zk",
+                  "image":"xa.repo.ndp.com:5000/paas/zookeeper:3.4.6",
+               }
+            ]
+         }
+      }
+   }
+}

@@ -1,0 +1,21 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "namespace": "facebook-pmd",
+      "name":"zk",
+      "labels":{
+         "name":"zk"
+      }
+   },
+   "spec":{
+      "port":42181,
+      "containerPort":2181,
+      "publicIPs": ["172.30.10.185"],
+      "protocol":"TCP",
+      "selector":{
+         "name":"zk"
+      }
+   }
+}
+

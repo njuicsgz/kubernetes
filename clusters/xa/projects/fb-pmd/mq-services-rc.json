@@ -32,7 +32,7 @@
                        {"name": "host-log", "mountPath": "/dianyi/log"}
                   ],
                   "env":[
-                        {"name": "ZK_ADDRESS", "value": "172.30.10.185:2181"}
+                        {"name": "ZK_ADDRESS", "value": "172.30.10.185:42181"}
                   ],
                   "ports":[
                   ]
