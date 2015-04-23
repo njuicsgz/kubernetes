@@ -1,0 +1,9 @@
+FROM xa.repo.ndp.com:5000/paas/u14-ssh-jdk7-tomcat7:latest 
+
+MAINTAINER PaaS/allen
+
+RUN locale-gen en_US.UTF-8 
+
+EXPOSE 22 8080
+
+CMD service tomcat7 start; /usr/sbin/sshd -D

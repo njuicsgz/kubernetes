@@ -1,4 +1,4 @@
-FROM xa.repo.ndp.com:5000/paas/u14-ssh-jdk1.7
+FROM xa.repo.ndp.com:5000/paas/u14-ssh-jdk1.7:1.0.1
 
 MAINTAINER PaaS/allen
 

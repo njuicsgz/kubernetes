@@ -32,7 +32,7 @@
                       {"name": "host-log", "mountPath": "/abc/log", "readOnly": false}
                   ],
                   "ports":[
-                      "containerPort": 8080
+                      {"containerPort": 8080}
                   ],
                   "env":[
                       {"name": "REG1", "value": "http://172.30.10.185:5000/v1/"}

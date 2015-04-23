@@ -1,0 +1,70 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"sd",
+      "namespace": "test"
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"sd"
+      },
+      "template":{
+         "metadata":{
+      	    "namespace": "test",
+            "labels":{
+               "name":"sd"
+            }
+         },
+         "spec":{
+           "volumes": [
+                 {"name": "host-log", "hostPath": {"path": "/tmp"}}
+            ], 
+            "containers":[
+               {
+                  "name":"registry-proxy",
+                  "image":"xa.repo.ndp.com:5000/test/svc-dep:0.1",
+                  "lifecycle": {
+                                "postStart": {
+                                                "exec": {
+                                                                  "command": [
+                                                                                        "/postStart.sh"
+                                                                                                          ]
+                                                                }
+                                              },
+                                "preStop": {
+                                                "exec": {
+                                                                  "command": [
+                                                                                        "/preStop.sh"
+                                                                                                          ]
+                                                                }
+                                              }
+                              },
+                              "livenessProbe": {
+                                            "httpGet": {
+                                                            "host": "",
+                                                            "path": "/",
+                                                            "port": "80"
+                                                          },
+                                            "initialDelaySeconds": 3,
+                                            "timeoutSeconds": 5
+                                          },
+                                          "readinessProbe": {
+                                                        "httpGet": {
+                                                                        "host": "172.30.10.185",
+                                                                        "path": "/",
+                                                                        "port": "15000"
+                                                                      },
+                                                        "initialDelaySeconds": 5,
+                                                        "timeoutSeconds": 5
+                                                      },
+                  "volumeMounts": [
+                     {"name": "host-log", "mountPath": "/tmp"}
+                 ] 
+               }
+            ]
+         }
+      }
+   }
+}

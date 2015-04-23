@@ -1,0 +1,7 @@
+FROM xa.repo.ndp.com:5000/paas/ubuntu-sshd 
+MAINTAINER PaaS/allen
+
+# to enable Chinese type
+RUN locale-gen en_US.UTF-8
+
+CMD ["/usr/sbin/sshd", "-D"]

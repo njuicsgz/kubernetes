@@ -9,10 +9,8 @@
       }
    },
    "spec":{
-      "port":28080,
-      "containerPort":8080,
+      "ports": [{"port": 28080, "targetPort": 8080, "protocol": "TCP"}],
       "publicIPs": ["172.30.10.185"],
-      "protocol":"TCP",
       "selector":{
          "name":"registry-ui"
       }
