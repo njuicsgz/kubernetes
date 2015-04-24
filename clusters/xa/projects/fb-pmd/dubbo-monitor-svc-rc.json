@@ -3,7 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"dubbo-monitor-svc",
-      "namespace": "facebook-pmd",
+      "namespace": "fb-pmd-allen",
       "labels":{
          "name":"dubbo-monitor-svc"
       }
@@ -15,7 +15,7 @@
       },
       "template":{
          "metadata":{
-	    "namespace": "facebook-pmd",
+	    "namespace": "fb-pmd-allen",
             "labels":{
                "name":"dubbo-monitor-svc"
             }
@@ -27,7 +27,7 @@
             "containers":[
                {
                   "name":"dubbo-monitor-svc",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/dubbo-monitor-svc:v1.0.6",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/dubbo-monitor-svc:1.2",
                   "volumeMounts": [
                        {"name": "host-log", "mountPath": "/dianyi/app/walle/dubbo-monitor-svc/logs"}
                   ],
@@ -42,7 +42,7 @@
                      {
                         "containerPort":7070,
                         "protocol":"TCP"
-                     },
+                     }
                   ]
                }
             ]

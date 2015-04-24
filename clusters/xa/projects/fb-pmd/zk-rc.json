@@ -3,10 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"zk",
-      "namespace": "facebook-pmd",
-      "labels":{
-         "name":"zk"
-      }
+      "namespace": "fb-pmd-allen"
    },
    "spec":{
       "replicas":1,
@@ -15,7 +12,7 @@
       },
       "template":{
          "metadata":{
-	    "namespace": "facebook-pmd",
+	    "namespace": "fb-pmd-allen",
             "labels":{
                "name":"zk"
             }
@@ -24,7 +21,7 @@
             "containers":[
                {
                   "name":"zk",
-                  "image":"xa.repo.ndp.com:5000/paas/zookeeper:3.4.6",
+                  "image":"xa.repo.ndp.com:5000/paas/zookeeper:3.4.6"
                }
             ]
          }

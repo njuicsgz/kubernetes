@@ -2,17 +2,15 @@
    "kind":"Service",
    "apiVersion":"v1beta3",
    "metadata":{
-      "namespace": "facebook-pmd",
+      "namespace": "fb-pmd-allen",
       "name":"config",
       "labels":{
          "name":"config"
       }
    },
    "spec":{
-      "port":48082,
-      "containerPort":8080,
+      "ports": [{"port": 48082, "targetPort": 8080, "protocol": "TCP"}],
       "publicIPs": ["172.30.10.185"],
-      "protocol":"TCP",
       "selector":{
          "name":"config"
       }

@@ -3,7 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"walle-web",
-      "namespace": "facebook-pmd",
+      "namespace": "fb-pmd-allen",
       "labels":{
          "name":"walle-web"
       }
@@ -15,7 +15,7 @@
       },
       "template":{
          "metadata":{
-	    "namespace": "facebook-pmd",
+	    "namespace": "fb-pmd-allen",
             "labels":{
                "name":"walle-web"
             }
@@ -24,10 +24,13 @@
             "containers":[
                {
                   "name":"walle-web",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/walle-web:v1.0.6",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/walle-web:1.2",
                   "env":[
                         {"name": "ZK_ADDRESS", "value": "172.30.10.185:42181"},
-                        {"name": "WALLE_JAVA_ADDRESS", "value": "172.30.10.185:49999"}
+                        {"name": "WALLE_JAVA_ADDRESS", "value": "172.30.10.122:9999"},
+                        {"name": "LC_ALL", "value": "en_US.UTF-8"},
+                        {"name": "LANG", "value": "en_US.UTF-8"},
+                        {"name": "LANGUAGE", "value": "en_US:en"}
                   ],
                   "ports":[
                   ]

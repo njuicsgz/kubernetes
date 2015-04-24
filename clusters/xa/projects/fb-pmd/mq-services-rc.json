@@ -3,7 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"mq-service",
-      "namespace": "facebook-pmd",
+      "namespace": "fb-pmd-allen",
       "labels":{
          "name":"mq-service"
       }
@@ -15,7 +15,7 @@
       },
       "template":{
          "metadata":{
-	    "namespace": "facebook-pmd",
+	    "namespace": "fb-pmd-allen",
             "labels":{
                "name":"mq-service"
             }
@@ -27,12 +27,15 @@
             "containers":[
                {
                   "name":"mq-service",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/mq-services:v1.0.6",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/mq-services:1.2",
                   "volumeMounts": [
                        {"name": "host-log", "mountPath": "/dianyi/log"}
                   ],
                   "env":[
-                        {"name": "ZK_ADDRESS", "value": "172.30.10.185:42181"}
+                        {"name": "ZK_ADDRESS", "value": "172.30.10.185:42181"},
+                        {"name": "LC_ALL", "value": "en_US.UTF-8"},
+                        {"name": "LANG", "value": "en_US.UTF-8"},
+                        {"name": "LANGUAGE", "value": "en_US:en"}
                   ],
                   "ports":[
                   ]

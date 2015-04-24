@@ -3,7 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"rdb-service",
-      "namespace": "facebook-pmd",
+      "namespace": "fb-pmd-allen",
       "labels":{
          "name":"rdb-service"
       }
@@ -15,7 +15,7 @@
       },
       "template":{
          "metadata":{
-	    "namespace": "facebook-pmd",
+	    "namespace": "fb-pmd-allen",
             "labels":{
                "name":"rdb-service"
             }
@@ -27,7 +27,7 @@
             "containers":[
                {
                   "name":"rdb-service",
-                  "image":"xa.repo.ndp.com:5000/facebook_pmd/rdb-services:v1.0.6",
+                  "image":"xa.repo.ndp.com:5000/facebook_pmd/rdb-services:1.2",
                   "volumeMounts": [
                       {"name": "host-log", "mountPath": "/dianyi/log"}
                   ],

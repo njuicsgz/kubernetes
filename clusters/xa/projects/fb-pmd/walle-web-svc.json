@@ -2,17 +2,15 @@
    "kind":"Service",
    "apiVersion":"v1beta3",
    "metadata":{
-      "namespace": "facebook-pmd",
+      "namespace": "fb-pmd-allen",
       "name":"walle-web",
       "labels":{
          "name":"walle-web"
       }
    },
    "spec":{
-      "port":40080,
-      "containerPort":80,
+       "ports": [{"port": 40080, "targetPort": 80, "protocol": "TCP"}],
       "publicIPs": ["172.30.10.185"],
-      "protocol":"TCP",
       "selector":{
          "name":"walle-web"
       }

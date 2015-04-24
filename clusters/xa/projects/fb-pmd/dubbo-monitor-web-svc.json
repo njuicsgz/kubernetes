@@ -2,17 +2,15 @@
    "kind":"Service",
    "apiVersion":"v1beta3",
    "metadata":{
-      "namespace": "facebook-pmd",
+      "namespace": "fb-pmd-allen",
       "name":"dubbo-monitor-web",
       "labels":{
          "name":"dubbo-monitor-web"
       }
    },
    "spec":{
-      "port":48081,
-      "containerPort":8080,
+       "ports": [{"port": 48081, "targetPort": 8080, "protocol": "TCP"}],
       "publicIPs": ["172.30.10.185"],
-      "protocol":"TCP",
       "selector":{
          "name":"dubbo-monitor-web"
       }

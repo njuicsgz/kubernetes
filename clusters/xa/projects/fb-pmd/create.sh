@@ -1,8 +1,9 @@
 #!/bin/bash
 
 kubectl config set current-context my-context
-kubectl config set-context my-context --namespace=facebook-pmd
-#kubecfg ns facebook-pmd
+kubectl config set-context my-context --namespace=fb-pmd-allen
+#kubecfg ns fb-pmd-allen
+kubectl create -f fb-ns.json
 kubectl create -f zk-rc.json 
 kubectl create -f zk-svc.json 
 
