@@ -1,0 +1,37 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"readiness",
+      "namespace": "test-allen"
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"readiness"
+      },
+      "template":{
+         "metadata":{
+      	    "namespace": "test-allen",
+            "labels":{
+               "name":"readiness"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"readiness",
+                  "image":"xa.repo.ndp.com:5000/test/readiness",
+                  "readinessProbe": {
+                    "httpGet": {
+                                    "host": "172.30.10.175",
+                                    "path": "/",
+                                    "port": "5000"
+                                  }
+                  }
+               }
+            ]
+         }
+      }
+   }
+}

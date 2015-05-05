@@ -1,0 +1,26 @@
+{
+  "apiVersion": "v1beta3",
+  "kind": "Service",
+  "metadata": {
+    "labels": null,
+    "name": "monitoring-influxdb-ui"
+  },
+  "spec": {
+    "publicIPs": ["172.30.10.185"],
+    "ports": [
+      {
+        "name": "http",
+        "port": 21083,
+        "targetPort": 8083
+      },
+      {
+        "name": "api",
+        "port": 21086,
+        "targetPort": 8086
+      }
+    ],
+    "selector": {
+      "name": "influxGrafana"
+    }
+  }
+}

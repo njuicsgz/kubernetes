@@ -3,7 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"registry-https",
-      "namespace": "test",
+      "namespace": "test-allen",
       "labels":{
          "name":"registry-https"
       }
@@ -15,7 +15,7 @@
       },
       "template":{
          "metadata":{
-	    "namespace": "test",
+	    "namespace": "test-allen",
             "labels":{
                "name":"registry-https"
             }

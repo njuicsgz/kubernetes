@@ -3,7 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"sd",
-      "namespace": "test"
+      "namespace": "test-allen"
    },
    "spec":{
       "replicas":1,
@@ -12,7 +12,7 @@
       },
       "template":{
          "metadata":{
-      	    "namespace": "test",
+      	    "namespace": "test-allen",
             "labels":{
                "name":"sd"
             }

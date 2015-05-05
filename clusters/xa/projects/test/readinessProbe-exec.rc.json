@@ -1,0 +1,38 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"readiness",
+      "namespace": "test-allen"
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"readiness"
+      },
+      "template":{
+         "metadata":{
+      	    "namespace": "test-allen",
+            "labels":{
+               "name":"readiness"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"readiness",
+                  "image":"xa.repo.ndp.com:5000/test/readiness",
+                  "command": ["/bin/sh", "-c", "echo ok > /tmp/health; /usr/sbin/sshd -D"],
+                  "readinessProbe": {
+                     "exec": {
+                         "command": [
+                           "cat", "/tmp/health"
+                         ]
+                     } 
+                  }
+               }
+            ]
+         }
+      }
+   }
+}

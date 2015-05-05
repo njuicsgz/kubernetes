@@ -1,0 +1,52 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"sd",
+      "namespace": "test-allen"
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"sd"
+      },
+      "template":{
+         "metadata":{
+      	    "namespace": "test-allen",
+            "labels":{
+               "name":"sd"
+            }
+         },
+         "spec":{
+           "volumes": [
+                 {"name": "host-log", "hostPath": {"path": "/tmp"}}
+            ], 
+            "containers":[
+               {
+                  "name":"registry-proxy",
+                  "image":"xa.repo.ndp.com:5000/test/svc-dep:0.2",
+                  "lifecycle": {
+                       "postStart": {
+                            "exec": {
+                                 "command": [
+                                       "/postStart.sh"
+                                 ]
+                             }
+                        },
+                        "preStop": {
+                            "exec": {
+                                "command": [
+                                     "/preStop.sh"
+                                 ]
+                            }
+                        }
+                  },
+                  "volumeMounts": [
+                     {"name": "host-log", "mountPath": "/tmp"}
+                 ] 
+               }
+            ]
+         }
+      }
+   }
+}

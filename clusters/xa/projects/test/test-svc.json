@@ -2,14 +2,12 @@
    "kind":"Service",
    "apiVersion":"v1beta3",
    "metadata":{
-      "namespace": "test",
-      "name":"registry-https",
+      "namespace": "test-allen",
+      "name":"registry-https"
    },
    "spec":{
-      "port":20443,
-      "containerPort":443,
+      "ports": [{"port": 222, "targetPort": 22, "protocol": "TCP"}],
       "publicIPs": ["172.30.10.185"],
-      "protocol":"TCP",
       "selector":{
          "name":"registry-https"
       }

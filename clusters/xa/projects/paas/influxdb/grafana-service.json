@@ -1,0 +1,23 @@
+{
+  "apiVersion": "v1beta3",
+  "kind": "Service",
+  "metadata": {
+    "labels": {
+      "name": "monitoring-grafana",
+      "kubernetes.io/cluster-service": "true"
+    },
+    "name": "monitoring-grafana"
+  },
+  "spec": {
+    "publicIPs": ["172.30.10.185"],
+    "ports": [
+      {
+        "port": 80,
+        "targetPort": 8080
+      }
+    ],
+    "selector": {
+      "name": "influxGrafana"
+    }
+  }
+}
