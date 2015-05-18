@@ -35,7 +35,7 @@
                       {"containerPort": 8080}
                   ],
                   "env":[
-                      {"name": "REG1", "value": "http://172.30.10.185:5000/v1/"}
+                      {"name": "REG1", "value": "http://172.30.10.195:5000/v1/"}
                   ]
                }
             ]
