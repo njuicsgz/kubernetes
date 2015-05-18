@@ -22,14 +22,14 @@ build_img()
 
 echo "begin build images with version: ${version}..."
 
-#build_img fbagent-services
-#build_img mq-services
-#build_img rdb-services
-#build_img walle-java
+build_img fbagent-services
+build_img mq-services
+build_img rdb-services
+build_img walle-java
 build_img walle-web
-#build_img config
-#build_img dubbo-monitor-svc
-#build_img dubbo-monitor-web
-#build_img scheduler
+build_img config
+build_img dubbo-monitor-svc
+build_img dubbo-monitor-web
+build_img scheduler
 
 echo "build finished"
