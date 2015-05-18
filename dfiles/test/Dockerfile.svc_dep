@@ -1,0 +1,7 @@
+FROM xa.repo.ndp.com:5000/paas/ubuntu-sshd:1.0.1 
+MAINTAINER PaaS/allen
+
+ADD postStart.sh /postStart.sh
+ADD preStop.sh /preStop.sh
+
+CMD /usr/sbin/sshd -D

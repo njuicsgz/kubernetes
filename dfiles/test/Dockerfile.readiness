@@ -1,0 +1,6 @@
+FROM xa.repo.ndp.com:5000/paas/ubuntu-sshd:1.0.1 
+MAINTAINER PaaS/allen
+
+ADD readinessProbe.sh /readinessProbe.sh
+
+CMD /usr/sbin/sshd -D
