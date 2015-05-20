@@ -22,11 +22,10 @@
                {
                   "name":"readiness",
                   "image":"xa.repo.ndp.com:5000/test/readiness",
-                  "command": ["/bin/sh", "-c", "echo ok > /tmp/health; /usr/sbin/sshd -D"],
                   "readinessProbe": {
                      "exec": {
                          "command": [
-                           "cat", "/tmp/health"
+                           "bash", "-c", "/readinessProbe.sh"
                          ]
                      } 
                   }

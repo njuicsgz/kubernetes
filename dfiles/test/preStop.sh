@@ -10,4 +10,4 @@ export PATH=/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin
 #    let "num=$num+1"
 #    echo -n "$num" > num.log
 #fi
-echo "ok"
+echo "preStop running..." >> /tmp/preStop.log

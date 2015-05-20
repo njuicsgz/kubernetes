@@ -2,6 +2,6 @@
   "apiVersion":"v1beta3",  
   "kind": "Namespace",
   "metadata": {
-    "name": "test"
+    "name": "test-allen"
   }
 }
