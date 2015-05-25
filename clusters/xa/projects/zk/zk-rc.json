@@ -1,0 +1,30 @@
+{
+   "kind":"ReplicationController",
+   "apiVersion":"v1beta3",
+   "metadata":{
+      "name":"zk",
+      "namespace": "paas"
+   },
+   "spec":{
+      "replicas":1,
+      "selector":{
+         "name":"zk"
+      },
+      "template":{
+         "metadata":{
+	    "namespace": "paas",
+            "labels":{
+               "name":"zk"
+            }
+         },
+         "spec":{
+            "containers":[
+               {
+                  "name":"zk",
+                  "image":"xa.repo.ndp.com:5000/paas/zookeeper:3.4.6"
+               }
+            ]
+         }
+      }
+   }
+}
