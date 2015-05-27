@@ -3,7 +3,7 @@
    "apiVersion":"v1beta3",
    "metadata":{
       "name":"config",
-      "namespace": "fb-pmd-allen",
+      "namespace": "paas",
       "labels":{
          "name":"config"
       }
@@ -15,7 +15,7 @@
       },
       "template":{
          "metadata":{
-	    "namespace": "fb-pmd-allen",
+	    "namespace": "paas",
             "labels":{
                "name":"config"
             }
@@ -32,7 +32,7 @@
                   },
                   "env":[
                         {"name": "ZK_ADDRESS", "value": "172.30.10.185:42181"},
-                        {"name": "database_url", "value": "jdbc:mysql://172.30.10.77:3306/pmdr-config-test?useUnicode=true&amp;characterEncoding=UTF-8"},
+                        {"name": "database_url", "value": "jdbc:mysql://172.30.10.77:3306/pmdr-config-test2?useUnicode=true&amp;characterEncoding=UTF-8"},
                         {"name": "database_username", "value": "root"},
                         {"name": "database_password", "value": "12354"}
                   ]
