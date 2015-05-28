@@ -37,16 +37,12 @@
           {
             "env": [
               {
-                "name": "INFLUXDB_EXTERNAL_URL",
-                "value": "/api/v1beta1/proxy/services/monitoring-grafana/db/"
-              },
-              {
                 "name": "INFLUXDB_HOST",
-                "value": "http://172.30.10.185:21080"
+                "value": "172.30.10.185"
               },
               {
                 "name": "INFLUXDB_PORT",
-                "value": "80"
+                "value": "21080"
               }
             ],
             "image": "xa.repo.ndp.com:5000/paas/heapster_grafana:v0.7",
