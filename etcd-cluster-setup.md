@@ -2,7 +2,7 @@ Setup etcd cluster of 3 nodes with version：v2.0.5:
 
 * node1:10.1.35.50
 ```
-root@AMZ-IAD-WallE-35-50:~/paas/script# cat etcd-restart.sh 
+root@host1:~/paas/script# cat etcd-restart.sh 
 #! /bin/bash
 export PATH=/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin
 
@@ -27,7 +27,7 @@ ps: Need to add http://127.0.0.1:4001 in listen-client-urls to allow etcdctl cmd
 
 * node2:10.1.35.51
 ```
-root@AMZ-IAD-WallE-35-51:~/paas/script# cat etcd-restart.sh 
+root@host1:~/paas/script# cat etcd-restart.sh 
 #! /bin/bash                                                                                                                        
 export PATH=/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin
 
@@ -50,7 +50,7 @@ nohup ./etcd -name infra1 -initial-advertise-peer-urls ${MY_ADDR}:2380 \
 ```
 * node3: 10.1.35.52
 ```
-root@AMZ-IAD-WallE-35-52:~/paas/script# cat etcd-restart.sh 
+root@host2:~/paas/script# cat etcd-restart.sh 
 #! /bin/bash                                                                                                                        
 export PATH=/sbin:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin
 

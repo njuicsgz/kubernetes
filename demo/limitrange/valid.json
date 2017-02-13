@@ -2,7 +2,7 @@
    "kind":"ReplicationController",
    "apiVersion":"v1beta3",
    "metadata":{
-      "namespace": "facebook-pmd",
+      "namespace": "app01",
       "name":"mq-service",
       "labels":{
          "name":"mq-service"
@@ -15,7 +15,7 @@
       },
       "template":{
          "metadata":{
-            "namespace": "facebook-pmd",
+            "namespace": "app01",
             "labels":{
                "name":"mq-service"
             }
@@ -24,7 +24,7 @@
             "containers":[
                {
                   "name":"mq-service",
-                  "image":"allen01:5000/facebook_pmd/mq-services",
+                  "image":"allen01:5000/app01/mq-services",
 		  "resources": {
 		       "limits": {
 		            "cpu": "1",

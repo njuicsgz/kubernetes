@@ -1,4 +1,4 @@
-FROM xa.repo.ndp.com:5000/paas/ubuntu-sshd
+FROM repo.paas.com:5000/paas/ubuntu-sshd
 MAINTAINER PaaS/allen
 
 ADD readinessProbe.sh /readinessProbe.sh

@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"mq-service",
-                  "image":"allen01:5000/facebook_pmd/mq-services",
+                  "image":"allen01:5000/app01/mq-services",
                   "ports":[
                   ]
                }

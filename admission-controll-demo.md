@@ -32,7 +32,7 @@ root@allen01:~/github/kubernetes/demo/limitrange# cat limit-range.json
   "kind": "LimitRange",
   "metadata": {
     "name": "my-limits",
-    "namespace": "facebook-pmd"
+    "namespace": "app_01"
   },
   "spec": {
     "limits": [
@@ -87,7 +87,7 @@ root@allen01:~/github/kubernetes/demo/limitrange# cat invalid.json
             "containers":[
                {
                   "name":"mq-service",
-                  "image":"allen01:5000/facebook_pmd/mq-services",
+                  "image":"allen01:5000/app_01/mq-services",
                   "ports":[
                   ]
                }
@@ -101,7 +101,7 @@ root@allen01:~/github/kubernetes/demo/limitrange# cat valid.json
    "kind":"ReplicationController",
    "apiVersion":"v1beta3",
    "metadata":{
-      "namespace": "facebook-pmd",
+      "namespace": "app_01",
       "name":"mq-service",
       "labels":{
          "name":"mq-service"
@@ -114,7 +114,7 @@ root@allen01:~/github/kubernetes/demo/limitrange# cat valid.json
       },
       "template":{
          "metadata":{
-            "namespace": "facebook-pmd",
+            "namespace": "app_01",
             "labels":{
                "name":"mq-service"
             }
@@ -123,7 +123,7 @@ root@allen01:~/github/kubernetes/demo/limitrange# cat valid.json
             "containers":[
                {
                   "name":"mq-service",
-                  "image":"allen01:5000/facebook_pmd/mq-services",
+                  "image":"allen01:5000/app_01/mq-services",
                   "resources": {
                        "limits": {
                             "cpu": "1",
@@ -165,7 +165,7 @@ root@allen01:~/github/kubernetes/demo/resourcequota# cat resource-quota.json
   "apiVersion": "v1beta3",
   "kind": "ResourceQuota",
   "metadata": {
-    "namespace": "facebook-pmd",
+    "namespace": "app_01",
     "name": "my-quota",
   },
   "spec": {
@@ -180,10 +180,10 @@ root@allen01:~/github/kubernetes/demo/resourcequota# cat resource-quota.json
   }
 }
 
-root@allen01:~/github/kubernetes/demo/resourcequota# kubectl create -f resource-quota.json --namespace=facebook-pmd
+root@allen01:~/github/kubernetes/demo/resourcequota# kubectl create -f resource-quota.json --namespace=app_01
 my-quota
 
-root@allen01:~/github/kubernetes/demo/resourcequota# kubectl describe resourcequota my-quota  --namespace=facebook-pmd
+root@allen01:~/github/kubernetes/demo/resourcequota# kubectl describe resourcequota my-quota  --namespace=app_01
 Name:                   my-quota
 Resource                Used    Hard
 --------                ----    ----
@@ -196,9 +196,9 @@ services                0       5
 
 root@allen01:~/github/kubernetes/demo/limitrange# kubectl get rc,pod
 POD                 IP                  CONTAINER(S)        IMAGE(S)                                HOST                        LABELS              STATUS              CREATED
-mq-service-zdrpp    10.10.85.44         mq-service          allen01:5000/facebook_pmd/mq-services   172.30.50.87/172.30.50.87   name=mq-service     Running             28 seconds
+mq-service-zdrpp    10.10.85.44         mq-service          allen01:5000/app_01/mq-services   172.30.50.87/172.30.50.87   name=mq-service     Running             28 seconds
 CONTROLLER          CONTAINER(S)        IMAGE(S)                                SELECTOR            REPLICAS
-mq-service          mq-service          allen01:5000/facebook_pmd/mq-services   name=mq-service     4
+mq-service          mq-service          allen01:5000/app_01/mq-services   name=mq-service     4
 
 root@allen01:~/github/kubernetes/demo/limitrange# tail /var/log/upstart/kube-controller-manager.log
 E0227 08:29:06.263520   79084 replication_controller.go:91] unable to create pod replica: pods "" is forbidden: Limited to 1 pods

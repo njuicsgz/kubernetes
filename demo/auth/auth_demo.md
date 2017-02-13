@@ -9,7 +9,7 @@ https://github.com/jlowdermilk/kubernetes/blob/de76486aa04509a341526bd54395366c2
 ###1. 生成SSL证书
 ```
   openssl req -x509 -newkey rsa:4086 \
-  -subj "/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=dev.k8s.paas.ndp.com" \
+  -subj "/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=dev.k8s.paas.com" \
   -keyout "key.pem" \
   -out "cert.pem" \
   -days 3650 -nodes -sha256
@@ -39,17 +39,17 @@ KUBE_APISERVER_OPTS="--address=0.0.0.0 \
 
 root@allen01:~/github/kubernetes/demo/Auth# cat authz_policy.json 
 {"user":"admin"}
-{"user":"fb", "namespace":"facebook-pmd"}
-{"user":"fb-r", "readonly":true, "namespace":"facebook-pmd"}
-{"user":"fb-r-pod", "readonly": true, "namespace": "facebook-pmd", "resource": "pods"}
+{"user":"allen", "namespace":"app01"}
+{"user":"allen-r", "readonly":true, "namespace":"app01"}
+{"user":"allen-r-pod", "readonly": true, "namespace": "app01", "resource": "pods"}
 {"user":"test", "namespace":"test"}
 {"user":"none-exist", "namespace":"none-exist-ns"}
 root@allen01:~/github/kubernetes/demo/Auth# cat known_tokens.csv
 myToken0,admin,8888
 myToken1,none-exist,1000
-myToken2,fb-r,1001
-myToken3,fb-r-pod,1002
-myToken4,fb,1003
+myToken2,allen-r,1001
+myToken3,allen-r-pod,1002
+myToken4,allen,1003
 myToken5,test,1004
 root@allen01:~/github/kubernetes/demo/Auth# service kube-apiserver restart
 kube-apiserver stop/waiting
@@ -84,8 +84,8 @@ drwxr-xr-x  7 root root  4096 Feb  3 12:53 kubernetes/
 ##4. Demo
 ###4.1 非认证的token不能访问任何资源
 ```
-root@allen01:~/github/kubernetes/demo/1+N# kubectl get pod --server=https://k8s.paas.ndp.com:6443 --token=myToken-x --namespace=facebook-pmd  
-F0226 08:04:17.351595  116786 get.go:166] request [&{Method:GET URL:https://k8s.paas.ndp.com:6443/api/v1beta1/pods?namespace=facebook-pmd Proto:HTTP/1.1 ProtoMajor:1 ProtoMinor:1 Header:map[] Body:<nil> ContentLength:0 TransferEncoding:[] Close:false Host:k8s.paas.ndp.com:6443 Form:map[] PostForm:map[] MultipartForm:<nil> Trailer:map[] RemoteAddr: RequestURI: TLS:<nil>}] failed (401) 401 Unauthorized: Unauthorized
+root@allen01:~/github/kubernetes/demo/1+N# kubectl get pod --server=https://k8s.paas.ndp.com:6443 --token=myToken-x --namespace=app01  
+F0226 08:04:17.351595  116786 get.go:166] request [&{Method:GET URL:https://k8s.paas.ndp.com:6443/api/v1beta1/pods?namespace=app01 Proto:HTTP/1.1 ProtoMajor:1 ProtoMinor:1 Header:map[] Body:<nil> ContentLength:0 TransferEncoding:[] Close:false Host:k8s.paas.ndp.com:6443 Form:map[] PostForm:map[] MultipartForm:<nil> Trailer:map[] RemoteAddr: RequestURI: TLS:<nil>}] failed (401) 401 Unauthorized: Unauthorized
 ```
 
 ###4.3 所有权用户具有所有权限-Admin
@@ -97,14 +97,14 @@ webserver
 
 ###4.4 只读用户不具有写操作权限-Read Only
 ```
-root@allen01:~/github/kubernetes/demo/1+N# kubectl create -f web-service.json --server=https://k8s.paas.ndp.com:6443 --token=myToken2 --namespace=facebook-pmd          
-F0226 06:54:21.765921  105520 create.go:78] request [&{Method:POST URL:https://k8s.paas.ndp.com:8443/api/v1beta1/services?namespace=facebook-pmd Proto:HTTP/1.1 ProtoMajor:1 ProtoMinor:1 Header:map[] Body:{Reader:} ContentLength:239 TransferEncoding:[] Close:false Host:k8s.paas.ndp.com:8443 Form:map[] PostForm:map[] MultipartForm:<nil> Trailer:map[] RemoteAddr: RequestURI: TLS:<nil>}] failed (403) 403 Forbidden: Forbidden: "/api/v1beta1/services?namespace=facebook-pmd"
+root@allen01:~/github/kubernetes/demo/1+N# kubectl create -f web-service.json --server=https://k8s.paas.ndp.com:6443 --token=myToken2 --namespace=app01          
+F0226 06:54:21.765921  105520 create.go:78] request [&{Method:POST URL:https://k8s.paas.ndp.com:8443/api/v1beta1/services?namespace=app01 Proto:HTTP/1.1 ProtoMajor:1 ProtoMinor:1 Header:map[] Body:{Reader:} ContentLength:239 TransferEncoding:[] Close:false Host:k8s.paas.ndp.com:8443 Form:map[] PostForm:map[] MultipartForm:<nil> Trailer:map[] RemoteAddr: RequestURI: TLS:<nil>}] failed (403) 403 Forbidden: Forbidden: "/api/v1beta1/services?namespace=app01"
 ```
 ###4.5 namespace域的用户可以操作NS资源
 ```
-root@allen01:~/github/kubernetes/demo/1+N# kubectl create -f web-service.json --server=https://k8s.paas.ndp.com:6443 --token=myToken4 --namespace=facebook-pmd
+root@allen01:~/github/kubernetes/demo/1+N# kubectl create -f web-service.json --server=https://k8s.paas.ndp.com:6443 --token=myToken4 --namespace=app01
 webserver
-root@allen01:~/github/kubernetes/demo/1+N# kubectl delete -f web-service.json --server=https://k8s.paas.ndp.com:6443 --token=myToken4 --namespace=facebook-pmd
+root@allen01:~/github/kubernetes/demo/1+N# kubectl delete -f web-service.json --server=https://k8s.paas.ndp.com:6443 --token=myToken4 --namespace=app01
 webserver
 ```
 ### 4.6 NS内用户可以操作其它NS资源（bug？）

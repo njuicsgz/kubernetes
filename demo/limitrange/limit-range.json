@@ -3,7 +3,7 @@
   "kind": "LimitRange",
   "metadata": {
     "name": "my-limits",
-    "namespace": "facebook-pmd"
+    "namespace": "app01"
   },
   "spec": {
     "limits": [

@@ -1,4 +1,4 @@
-FROM xa.repo.ndp.com:5000/paas/u14-ssh-nginx1.4.6
+FROM repo.paas.com:5000/paas/u14-ssh-nginx1.4.6
 MAINTAINER allen.gao
 
 RUN mkdir -p /etc/nginx/certs 

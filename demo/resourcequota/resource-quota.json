@@ -2,7 +2,7 @@
   "apiVersion": "v1beta3",
   "kind": "ResourceQuota",
   "metadata": {
-    "namespace": "facebook-pmd",
+    "namespace": "app01",
     "name": "my-quota",
   },
   "spec": {
